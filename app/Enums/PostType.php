@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum PostType: string
 {
-    case NEWS = 'news';
+    case ANNOUNCEMENT = 'announcement';
     case BENEFIT = 'benefit';
     case EVENT = 'event';
 }
