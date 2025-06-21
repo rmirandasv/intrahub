@@ -19,7 +19,9 @@ class AnnouncementController extends Controller
     {
         Gate::authorize('viewAny', Post::class);
 
-        $announcements = Post::announcements()
+        $announcements = Post::query()
+            ->with(relations: ['user'])
+            ->announcements()
             ->paginate(10);
 
         return Inertia::render(component: 'announcements/index', props: [

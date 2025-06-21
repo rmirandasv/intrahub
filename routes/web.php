@@ -19,14 +19,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     )->name('announcements.index');
 
     Route::get(
-        '/announcements/{announcement}',
-        [AnnouncementController::class, 'show']
-    )->name('announcements.show');
-
-    Route::get(
         '/announcements/create',
         [AnnouncementController::class, 'create']
     )->name('announcements.create');
+
+    Route::get(
+        '/announcements/{announcement}',
+        [AnnouncementController::class, 'show']
+    )->name('announcements.show');
 
     Route::get(
         '/announcements/{announcement}/edit',
