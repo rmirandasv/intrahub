@@ -20,9 +20,11 @@ return new class extends Migration
             $table->datetime('published_at')->nullable();
             $table->datetime('expiration_date')->nullable();
             $table->boolean('is_featured')->default(false);
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

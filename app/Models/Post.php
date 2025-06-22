@@ -50,9 +50,9 @@ class Post extends Model
         return $this->hasOne(Event::class);
     }
 
-    public function categories(): BelongsToMany
+    public function category(): BelongsTo
     {
-        return $this->belongsToMany(Category::class, 'category_post');
+        return $this->belongsTo(Category::class);
     }
 
     #[Scope]
