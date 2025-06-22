@@ -40,9 +40,9 @@ class AnnouncementController extends Controller
     {
         Gate::authorize('create', Post::class);
 
-        $announcement = $createAnnouncement->handle(Auth::user(), $request->validated());
+        $createAnnouncement->handle(Auth::user(), $request->validated());
 
-        return redirect()->route('announcements.show', $announcement);
+        return redirect()->route('announcements.index');
     }
 
     public function show(Post $announcement)
@@ -65,7 +65,7 @@ class AnnouncementController extends Controller
 
         $updateAnnouncement->handle($announcement, $request->validated());
 
-        return redirect()->route('announcements.show', $announcement);
+        return redirect()->route('announcements.index');
     }
 
     public function destroy(Post $announcement, DeletePost $deletePost)

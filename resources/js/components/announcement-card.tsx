@@ -2,22 +2,24 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { AlertCircle, Clock, Heart, MessageCircle, Share2 } from 'lucide-react';
-import { useState } from 'react';
+import { useInitials } from '@/hooks/use-initials';
 import { Announcement } from '@/types';
+import { Link } from '@inertiajs/react';
+import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
+import { Clock, Edit, EllipsisVertical, Heart, MessageCircle, Share2, Trash } from 'lucide-react';
+import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
-export function AnnouncementCard({ announcement }: { announcement: Announcement }) {
+interface AnnouncementCardProps {
+  announcement: Announcement;
+  onDelete?: (announcement: Announcement) => void;
+}
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'high':
-        return 'bg-red-100 text-red-800 hover:bg-red-200';
-      case 'medium':
-        return 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200';
-      case 'low':
-        return 'bg-green-100 text-green-800 hover:bg-green-200';
-      default:
-        return 'bg-gray-100 text-gray-800 hover:bg-gray-200';
+export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardProps) {
+  const initials = useInitials();
+
+  const handleDelete = () => {
+    if (onDelete) {
+      onDelete(announcement);
     }
   };
 
@@ -28,12 +30,7 @@ export function AnnouncementCard({ announcement }: { announcement: Announcement 
           <div className="flex items-center space-x-3">
             <Avatar>
               <AvatarImage src={announcement.user.name || '/placeholder.svg'} />
-              <AvatarFallback>
-                {announcement.user.name
-                  .split(' ')
-                  .map((n) => n[0])
-                  .join('')}
-              </AvatarFallback>
+              <AvatarFallback>{initials(announcement.user.name)}</AvatarFallback>
             </Avatar>
             <div>
               <div className="flex items-center gap-2">
@@ -60,19 +57,40 @@ export function AnnouncementCard({ announcement }: { announcement: Announcement 
         </div>
       </CardContent>
       <CardFooter className="pt-0">
-        <div className="flex w-full items-center space-x-4">
-          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
-            <Heart className="mr-1 h-4 w-4" />
-            {1}
-          </Button>
-          <Button variant="ghost" size="sm">
-            <MessageCircle className="mr-1 h-4 w-4" />
-            {2}
-          </Button>
-          <Button variant="ghost" size="sm">
-            <Share2 className="mr-1 h-4 w-4" />
-            Share
-          </Button>
+        <div className="flex w-full items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+              <Heart className="mr-1 h-4 w-4" />
+              {1}
+            </Button>
+            <Button variant="ghost" size="sm">
+              <MessageCircle className="mr-1 h-4 w-4" />
+              {2}
+            </Button>
+            <Button variant="ghost" size="sm">
+              <Share2 className="mr-1 h-4 w-4" />
+              Share
+            </Button>
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <EllipsisVertical className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem asChild>
+                <Link href={route('announcements.edit', announcement.id)} className="flex items-center gap-2">
+                  <Edit className="h-4 w-4" />
+                  Edit
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleDelete}>
+                <Trash className="h-4 w-4" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </CardFooter>
     </Card>
