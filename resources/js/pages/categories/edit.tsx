@@ -1,9 +1,9 @@
-import CategoryForm, { CategoryFormValues } from "@/components/category-form";
+import CategoryForm, { CategoryFormValues } from '@/components/category-form';
 import Heading from '@/components/heading';
 import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
 import { Category } from '@/types';
-import { router } from "@inertiajs/react";
+import { router } from '@inertiajs/react';
 
 export default function EditCategory({ category }: { category: Category }) {
   const handleSubmit = (values: CategoryFormValues) => {

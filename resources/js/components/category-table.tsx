@@ -24,32 +24,22 @@ export function CategoryTable({ categories, onDelete }: CategoryTableProps) {
       <table className="min-w-full divide-y divide-border">
         <thead className="bg-muted/50">
           <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              Category
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              Description
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              Posts
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              Created
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              Updated
-            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-muted-foreground uppercase">Category</th>
+            <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-muted-foreground uppercase">Description</th>
+            <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-muted-foreground uppercase">Posts</th>
+            <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-muted-foreground uppercase">Created</th>
+            <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-muted-foreground uppercase">Updated</th>
             <th className="relative px-6 py-3">
               <span className="sr-only">Actions</span>
             </th>
           </tr>
         </thead>
-        <tbody className="bg-background divide-y divide-border">
+        <tbody className="divide-y divide-border bg-background">
           {categories.map((category) => (
-            <tr key={category.id} className="hover:bg-muted/50 transition-colors">
+            <tr key={category.id} className="transition-colors hover:bg-muted/50">
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10 mr-3">
+                  <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
                     <FileText className="h-4 w-4 text-primary" />
                   </div>
                   <div>
@@ -58,22 +48,20 @@ export function CategoryTable({ categories, onDelete }: CategoryTableProps) {
                 </div>
               </td>
               <td className="px-6 py-4">
-                <div className="text-sm text-muted-foreground max-w-xs truncate">
-                  {category.description || 'No description'}
-                </div>
+                <div className="max-w-xs truncate text-sm text-muted-foreground">{category.description || 'No description'}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <Badge variant="secondary" className="text-xs">
                   {category.post_count || 0}
                 </Badge>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
+              <td className="px-6 py-4 text-sm whitespace-nowrap text-muted-foreground">
                 <div>
                   <div>{format(category.created_at, 'MMM d, yyyy')}</div>
                   <div className="text-xs">{formatDistanceToNow(category.created_at, { addSuffix: true })}</div>
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
+              <td className="px-6 py-4 text-sm whitespace-nowrap text-muted-foreground">
                 {category.updated_at !== category.created_at ? (
                   <div>
                     <div>{format(category.updated_at, 'MMM d, yyyy')}</div>
@@ -83,7 +71,7 @@ export function CategoryTable({ categories, onDelete }: CategoryTableProps) {
                   <span className="text-muted-foreground/50">—</span>
                 )}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <td className="px-6 py-4 text-right text-sm font-medium whitespace-nowrap">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm">
@@ -110,4 +98,4 @@ export function CategoryTable({ categories, onDelete }: CategoryTableProps) {
       </table>
     </div>
   );
-} 
+}

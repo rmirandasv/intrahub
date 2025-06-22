@@ -21,7 +21,7 @@ export function CategoryCard({ category, onDelete }: CategoryCardProps) {
   };
 
   return (
-    <Card className="w-full hover:shadow-md transition-shadow">
+    <Card className="w-full transition-shadow hover:shadow-md">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3">
@@ -49,9 +49,7 @@ export function CategoryCard({ category, onDelete }: CategoryCardProps) {
         </div>
       </CardHeader>
       <CardContent className="pb-3">
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          {category.description || 'No description provided'}
-        </p>
+        <p className="text-sm leading-relaxed text-muted-foreground">{category.description || 'No description provided'}</p>
       </CardContent>
       <CardFooter className="pt-0">
         <div className="flex w-full items-center justify-between">
@@ -87,4 +85,4 @@ export function CategoryCard({ category, onDelete }: CategoryCardProps) {
       </CardFooter>
     </Card>
   );
-} 
+}

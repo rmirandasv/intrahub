@@ -32,7 +32,7 @@ export function CategoryDeleteModal({ category, isOpen, onClose }: CategoryDelet
           <DialogDescription>
             Are you sure you want to delete the category "{category?.name}"? This action cannot be undone.
             {category?.post_count && category.post_count > 0 && (
-              <span className="block mt-2 text-sm text-amber-600">
+              <span className="mt-2 block text-sm text-amber-600">
                 ⚠️ This category has {category.post_count} post{category.post_count !== 1 ? 's' : ''} associated with it.
               </span>
             )}
@@ -49,4 +49,4 @@ export function CategoryDeleteModal({ category, isOpen, onClose }: CategoryDelet
       </DialogContent>
     </Dialog>
   );
-} 
+}
