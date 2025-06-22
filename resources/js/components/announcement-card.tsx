@@ -1,0 +1,98 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { useInitials } from '@/hooks/use-initials';
+import { Announcement } from '@/types';
+import { Link } from '@inertiajs/react';
+import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
+import { Clock, Edit, EllipsisVertical, Heart, MessageCircle, Share2, Trash } from 'lucide-react';
+import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
+
+interface AnnouncementCardProps {
+  announcement: Announcement;
+  onDelete?: (announcement: Announcement) => void;
+}
+
+export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardProps) {
+  const initials = useInitials();
+
+  const handleDelete = () => {
+    if (onDelete) {
+      onDelete(announcement);
+    }
+  };
+
+  return (
+    <Card className="w-full">
+      <CardHeader className="pb-3">
+        <div className="flex items-start justify-between">
+          <div className="flex items-center space-x-3">
+            <Avatar>
+              <AvatarImage src={announcement.user.name || '/placeholder.svg'} />
+              <AvatarFallback>{initials(announcement.user.name)}</AvatarFallback>
+            </Avatar>
+            <div>
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-medium">{announcement.user.name}</p>
+                <Badge variant="secondary" className="text-xs">
+                  {announcement.user.is_staff ? 'Staff' : 'User'}
+                </Badge>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Clock className="h-3 w-3" />
+                {announcement.created_at}
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Badge variant="outline">Category</Badge>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="pb-3">
+        <div className="space-y-3">
+          <h3 className="text-xl font-semibold">{announcement.title}</h3>
+          <p className="leading-relaxed text-muted-foreground">{announcement.content}</p>
+        </div>
+      </CardContent>
+      <CardFooter className="pt-0">
+        <div className="flex w-full items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+              <Heart className="mr-1 h-4 w-4" />
+              {1}
+            </Button>
+            <Button variant="ghost" size="sm">
+              <MessageCircle className="mr-1 h-4 w-4" />
+              {2}
+            </Button>
+            <Button variant="ghost" size="sm">
+              <Share2 className="mr-1 h-4 w-4" />
+              Share
+            </Button>
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <EllipsisVertical className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem asChild>
+                <Link href={route('announcements.edit', announcement.id)} className="flex items-center gap-2">
+                  <Edit className="h-4 w-4" />
+                  Edit
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleDelete}>
+                <Trash className="h-4 w-4" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </CardFooter>
+    </Card>
+  );
+}
