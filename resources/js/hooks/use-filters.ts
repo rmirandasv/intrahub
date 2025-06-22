@@ -27,24 +27,27 @@ export function useFilters(initialFilters: Filters = {}, options: UseFilterOptio
     return { ...initialFilters, ...result };
   });
 
-  const updateUrl = useCallback((newFilters: Filters) => {
-    const query = queryString.stringify(newFilters, {
-      arrayFormat: 'bracket',
-      encode: false,
-    });
-
-    const url = `${location.pathname}?${decodeURIComponent(query)}`;
-
-    if (options.visitOnChange) {
-      router.visit(url, {
-        replace: options.replace ?? true,
-        preserveState: options.preserveState ?? true,
-        onFinish: () => router.push({ url }),
+  const updateUrl = useCallback(
+    (newFilters: Filters) => {
+      const query = queryString.stringify(newFilters, {
+        arrayFormat: 'bracket',
+        encode: false,
       });
-    } else {
-      router.push({ url });
-    }
-  }, [options.visitOnChange, options.replace, options.preserveState]);
+
+      const url = `${location.pathname}?${decodeURIComponent(query)}`;
+
+      if (options.visitOnChange) {
+        router.visit(url, {
+          replace: options.replace ?? true,
+          preserveState: options.preserveState ?? true,
+          onFinish: () => router.push({ url }),
+        });
+      } else {
+        router.push({ url });
+      }
+    },
+    [options.visitOnChange, options.replace, options.preserveState],
+  );
 
   const toggleFilterValue = (key: string, value: string) => {
     setFilters((prev) => {

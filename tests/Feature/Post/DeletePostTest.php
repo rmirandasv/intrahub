@@ -15,9 +15,8 @@ test('should delete the post when the post exists', function () {
 
     $postId = $post->id;
 
-    $deletePostAction = new DeletePost();
+    $deletePostAction = new DeletePost;
     $deletePostAction->handle($post);
 
     assertFalse(Post::where('id', $postId)->exists(), false);
 });
-

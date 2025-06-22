@@ -23,10 +23,10 @@ class StoreAnnouncementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required','string','max:255'],
-            'content' => ['required','string'],
-            'expiration_date' => ['nullable','date'],
-            'is_featured' => ['nullable','boolean'],
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
+            'expiration_date' => ['nullable', 'date'],
+            'is_featured' => ['nullable', 'boolean'],
         ];
     }
 }

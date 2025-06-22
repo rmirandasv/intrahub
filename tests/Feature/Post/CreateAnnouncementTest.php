@@ -16,7 +16,7 @@ test('should create an announcement with all provided data', function () {
         'is_featured' => true,
     ];
 
-    $createAnnouncement = new CreateAnnouncement();
+    $createAnnouncement = new CreateAnnouncement;
     $post = $createAnnouncement->handle($user, $data);
 
     expect($post->title)->toBe($data['title']);

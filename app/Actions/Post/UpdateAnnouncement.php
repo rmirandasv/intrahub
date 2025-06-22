@@ -8,9 +8,8 @@ class UpdateAnnouncement
 {
     /**
      * Update the announcement with the given data.
-     * @param  \App\Models\Post  $post
-     * @param  array  $data{ title: string, content: string, expiration_date: string, is_featured: boolean }
-     * @return void
+     *
+     * @param  array  $data{  title: string, content: string, expiration_date: string, is_featured: boolean }
      */
     public function handle(Post $post, array $data): void
     {
@@ -21,5 +20,4 @@ class UpdateAnnouncement
             'is_featured' => $data['is_featured'] ?? false,
         ]);
     }
-
 }

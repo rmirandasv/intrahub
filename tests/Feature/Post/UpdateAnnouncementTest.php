@@ -16,7 +16,7 @@ test('should update the announcement with new title', function () {
         'post_type' => PostType::ANNOUNCEMENT,
     ]);
 
-    $updateAnnouncement = new UpdateAnnouncement();
+    $updateAnnouncement = new UpdateAnnouncement;
     $updateAnnouncement->handle($post, [
         'title' => 'New Title',
         'content' => 'Old Content',
@@ -37,7 +37,7 @@ test('should update the announcement with new expiration date', function () {
         'post_type' => PostType::ANNOUNCEMENT,
     ]);
 
-    $updateAnnouncement = new UpdateAnnouncement();
+    $updateAnnouncement = new UpdateAnnouncement;
     $updateAnnouncement->handle($post, [
         'title' => 'Old Title',
         'content' => 'Old Content',
@@ -58,7 +58,7 @@ test('should update the announcement with featured status set to true', function
         'post_type' => PostType::ANNOUNCEMENT,
     ]);
 
-    $updateAnnouncement = new UpdateAnnouncement();
+    $updateAnnouncement = new UpdateAnnouncement;
     $updateAnnouncement->handle($post, [
         'title' => 'Old Title',
         'content' => 'Old Content',
@@ -79,7 +79,7 @@ test('should update the announcement with featured status set to false', functio
         'post_type' => PostType::ANNOUNCEMENT,
     ]);
 
-    $updateAnnouncement = new UpdateAnnouncement();
+    $updateAnnouncement = new UpdateAnnouncement;
     $updateAnnouncement->handle($post, [
         'title' => 'Old Title',
         'content' => 'Old Content',
@@ -101,7 +101,7 @@ test('should handle null values for optional fields', function () {
         'post_type' => PostType::ANNOUNCEMENT,
     ]);
 
-    $updateAnnouncement = new UpdateAnnouncement();
+    $updateAnnouncement = new UpdateAnnouncement;
     $updateAnnouncement->handle($post, [
         'title' => 'New Title',
         'content' => 'New Content',
