@@ -18,6 +18,11 @@ const mainNavItems: NavItem[] = [
     href: '/announcements',
     icon: Megaphone,
   },
+  {
+    title: 'Categories',
+    href: '/categories',
+    icon: Folder,
+  },
 ];
 
 const footerNavItems: NavItem[] = [
