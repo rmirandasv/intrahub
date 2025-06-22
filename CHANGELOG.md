@@ -1,3 +1,11 @@
+# [0.1.0](https://github.com/rmirandasv/intrahub/compare/v0.0.2...v0.1.0) (2025-06-22)
+
+
+### Features
+
+* add Category factory, and tests for category creation ([8791f97](https://github.com/rmirandasv/intrahub/commit/8791f9767736beb387dee716cb3248fcd8c0acc9))
+* category management (crud) ([b9f2193](https://github.com/rmirandasv/intrahub/commit/b9f2193b49062812564d43ea44c90a9375ed3d3c))
+
 ## [0.0.2](https://github.com/rmirandasv/intrahub/compare/v0.0.1...v0.0.2) (2025-06-22)
 
 # Changelog
