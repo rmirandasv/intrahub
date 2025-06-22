@@ -1,8 +1,8 @@
-import AppLayout from '@/layouts/app-layout';
 import AnnouncementForm, { AnnouncementFormValues } from '@/components/announcement-form';
-import { router, usePage } from "@inertiajs/react";
-import { useState } from "react";
-import { Announcement } from "@/types";
+import AppLayout from '@/layouts/app-layout';
+import { Announcement } from '@/types';
+import { router, usePage } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function AnnouncementEdit({ announcement }: { announcement: Announcement }) {
   const { errors } = usePage().props;
@@ -33,15 +33,9 @@ export default function AnnouncementEdit({ announcement }: { announcement: Annou
         <div className="flex flex-col gap-4">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Edit Announcement</h1>
-            <p className="text-muted-foreground">
-                Edit the announcement to share important information with your team and stakeholders.
-            </p>
+            <p className="text-muted-foreground">Edit the announcement to share important information with your team and stakeholders.</p>
           </div>
-          <AnnouncementForm 
-            onSubmit={onSubmit}
-            loading={loading}
-            initialData={initialData}
-          />
+          <AnnouncementForm onSubmit={onSubmit} loading={loading} initialData={initialData} />
         </div>
       </div>
     </AppLayout>

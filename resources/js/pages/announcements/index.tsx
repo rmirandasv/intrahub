@@ -1,8 +1,8 @@
-import { AnnouncementCard } from "@/components/announcement-card";
-import { AnnouncementDeleteModal } from "@/components/announcement-delete-modal";
+import { AnnouncementCard } from '@/components/announcement-card';
+import { AnnouncementDeleteModal } from '@/components/announcement-delete-modal';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
-import { Announcement, Paginated } from "@/types";
+import { Announcement, Paginated } from '@/types';
 import { Link } from '@inertiajs/react';
 import { useState } from 'react';
 
@@ -36,20 +36,12 @@ export default function AnnouncementIndex({ announcements }: { announcements: Pa
         </div>
         <div className="mt-6 space-y-6">
           {announcements.data.map((announcement) => (
-            <AnnouncementCard 
-              key={announcement.id} 
-              announcement={announcement} 
-              onDelete={handleDeleteClick}
-            />
+            <AnnouncementCard key={announcement.id} announcement={announcement} onDelete={handleDeleteClick} />
           ))}
         </div>
       </div>
 
-      <AnnouncementDeleteModal
-        announcement={announcementToDelete}
-        isOpen={isDeleteModalOpen}
-        onClose={handleCloseModal}
-      />
+      <AnnouncementDeleteModal announcement={announcementToDelete} isOpen={isDeleteModalOpen} onClose={handleCloseModal} />
     </AppLayout>
   );
 }

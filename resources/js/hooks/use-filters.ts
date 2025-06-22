@@ -1,6 +1,6 @@
-import { router } from "@inertiajs/react";
-import queryString from "query-string";
-import { useEffect, useRef, useState } from "react";
+import { router } from '@inertiajs/react';
+import queryString from 'query-string';
+import { useEffect, useRef, useState } from 'react';
 
 type FilterValue = string | string[];
 type Filters = Record<string, FilterValue>;
@@ -11,22 +11,17 @@ type UseFilterOptions = {
   visitOnChange?: boolean;
 };
 
-export function useFilters(
-  initialFilters: Filters = {},
-  options: UseFilterOptions = {}
-) {
+export function useFilters(initialFilters: Filters = {}, options: UseFilterOptions = {}) {
   const isFirstRender = useRef(true);
 
   const [filters, setFilters] = useState<Filters>(() => {
     const parsed = queryString.parse(location.search, {
-      arrayFormat: "bracket",
+      arrayFormat: 'bracket',
     });
 
     const result: Filters = {};
     for (const [key, value] of Object.entries(parsed)) {
-      result[key] = Array.isArray(value)
-        ? value.filter((v): v is string => v !== null && v.trim() !== "")
-        : ((value ?? "") as string);
+      result[key] = Array.isArray(value) ? value.filter((v): v is string => v !== null && v.trim() !== '') : ((value ?? '') as string);
     }
 
     return { ...initialFilters, ...result };
@@ -34,7 +29,7 @@ export function useFilters(
 
   const updateUrl = (newFilters: Filters) => {
     const query = queryString.stringify(newFilters, {
-      arrayFormat: "bracket",
+      arrayFormat: 'bracket',
       encode: false,
     });
 
@@ -54,15 +49,9 @@ export function useFilters(
   const toggleFilterValue = (key: string, value: string) => {
     setFilters((prev) => {
       const current = prev[key];
-      const currentArray = Array.isArray(current)
-        ? [...current]
-        : current
-          ? [current]
-          : [];
+      const currentArray = Array.isArray(current) ? [...current] : current ? [current] : [];
 
-      const updated = currentArray.includes(value)
-        ? currentArray.filter((v) => v !== value)
-        : [...currentArray, value];
+      const updated = currentArray.includes(value) ? currentArray.filter((v) => v !== value) : [...currentArray, value];
 
       return { ...prev, [key]: updated };
     });

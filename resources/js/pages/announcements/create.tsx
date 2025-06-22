@@ -1,7 +1,7 @@
-import AppLayout from '@/layouts/app-layout';
 import AnnouncementForm, { AnnouncementFormValues } from '@/components/announcement-form';
-import { router, usePage } from "@inertiajs/react";
-import { useState } from "react";
+import AppLayout from '@/layouts/app-layout';
+import { router, usePage } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function AnnouncementCreate() {
   const { errors } = usePage().props;
@@ -27,10 +27,7 @@ export default function AnnouncementCreate() {
             <h1 className="text-3xl font-bold tracking-tight">Create Announcement</h1>
             <p className="text-muted-foreground">Add a new announcement to share important information with your team and stakeholders.</p>
           </div>
-          <AnnouncementForm 
-            onSubmit={onSubmit}
-            loading={loading}
-          />
+          <AnnouncementForm onSubmit={onSubmit} loading={loading} />
         </div>
       </div>
     </AppLayout>

@@ -27,11 +27,7 @@ interface AnnouncementFormProps {
   loading?: boolean;
 }
 
-export default function AnnouncementForm({ 
-  initialData, 
-  onSubmit, 
-  loading = false 
-}: AnnouncementFormProps) {
+export default function AnnouncementForm({ initialData, onSubmit, loading = false }: AnnouncementFormProps) {
   const form = useForm<AnnouncementFormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -125,4 +121,4 @@ export default function AnnouncementForm({
       </form>
     </Form>
   );
-} 
+}

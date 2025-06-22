@@ -25,24 +25,24 @@ export type PaginationLinks = {
 
 export type Auth = {
   user: User;
-}
+};
 
 export type BreadcrumbItem = {
   title: string;
   href: string;
-}
+};
 
 export type NavGroup = {
   title: string;
   items: NavItem[];
-}
+};
 
 export type NavItem = {
   title: string;
   href: string;
   icon?: LucideIcon | null;
   isActive?: boolean;
-}
+};
 
 export type SharedData = {
   name: string;
@@ -51,7 +51,7 @@ export type SharedData = {
   ziggy: Config & { location: string };
   sidebarOpen: boolean;
   [key: string]: unknown;
-}
+};
 
 export type User = {
   id: number;
@@ -62,11 +62,11 @@ export type User = {
   created_at: string;
   updated_at: string;
   [key: string]: unknown; // This allows for additional properties...
-}
+};
 
 export type PostType = 'announcement' | 'benefit' | 'event';
 
-export type Post {
+export type Post = {
   id: number;
   title: string;
   post_type: PostType;
@@ -77,6 +77,6 @@ export type Post {
   created_at: string;
   updated_at: string;
   content: string;
-}
+};
 
 export type Announcement = Post;

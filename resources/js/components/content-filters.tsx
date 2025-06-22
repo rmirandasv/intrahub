@@ -1,11 +1,11 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useFilters } from "@/hooks/use-filters";
+import { useFilters } from '@/hooks/use-filters';
 import { X } from 'lucide-react';
 
-export function ContentFilters () {
-  const { filters, updateFilter, clearFilters } = useFilters()
+export function ContentFilters() {
+  const { filters, updateFilter, clearFilters } = useFilters();
 
   return (
     <div className="flex flex-col gap-4 rounded-lg border bg-background p-4">

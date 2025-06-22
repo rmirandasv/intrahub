@@ -17,7 +17,7 @@ const mainNavItems: NavItem[] = [
     title: 'Announcements',
     href: '/announcements',
     icon: Megaphone,
-  }
+  },
 ];
 
 const footerNavItems: NavItem[] = [
