@@ -9,8 +9,7 @@ class CreateCategory
     /**
      * Create a new category
      *
-     * @param array $data{ name: string, description: string }
-     * @return Category
+     * @param  array  $data{  name: string, description: string }
      */
     public function handle(array $data): Category
     {

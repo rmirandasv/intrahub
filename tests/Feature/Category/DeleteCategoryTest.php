@@ -15,7 +15,7 @@ test('should delete the category when the category exists', function () {
 
     $categoryId = $category->id;
 
-    $deleteCategoryAction = new DeleteCategory();
+    $deleteCategoryAction = new DeleteCategory;
     $deleteCategoryAction->handle($category);
 
     assertFalse(Category::where('id', $categoryId)->exists(), false);
@@ -30,7 +30,7 @@ test('should remove category from database', function () {
         'description' => $category->description,
     ]);
 
-    $deleteCategoryAction = new DeleteCategory();
+    $deleteCategoryAction = new DeleteCategory;
     $deleteCategoryAction->handle($category);
 
     $this->assertDatabaseMissing('categories', [
@@ -43,7 +43,7 @@ test('should handle deletion of multiple categories', function () {
     $category2 = Category::factory()->create();
     $category3 = Category::factory()->create();
 
-    $deleteCategoryAction = new DeleteCategory();
+    $deleteCategoryAction = new DeleteCategory;
 
     // Delete first category
     $deleteCategoryAction->handle($category1);
@@ -62,8 +62,8 @@ test('should handle deletion of multiple categories', function () {
 test('should return void as expected', function () {
     $category = Category::factory()->create();
 
-    $deleteCategoryAction = new DeleteCategory();
+    $deleteCategoryAction = new DeleteCategory;
     $result = $deleteCategoryAction->handle($category);
 
     expect($result)->toBeNull();
-}); 
+});

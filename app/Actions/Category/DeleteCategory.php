@@ -8,9 +8,6 @@ class DeleteCategory
 {
     /**
      * Delete a category
-     *
-     * @param Category $category
-     * @return void
      */
     public function handle(Category $category): void
     {

@@ -9,9 +9,7 @@ class UpdateCategory
     /**
      * Update a category
      *
-     * @param Category $category
-     * @param array $data{ name: string, description: string }
-     * @return Category
+     * @param  array  $data{  name: string, description: string }
      */
     public function handle(Category $category, array $data): Category
     {

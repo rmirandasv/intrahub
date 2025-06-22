@@ -10,10 +10,8 @@ class CreateAnnouncement
 {
     /**
      * Create a new announcement for the given user.
-     * @param  \App\Models\User  $user
-     * @param  array  $data{ title: string, content: string, expiration_date: string, is_featured: boolean }
-     * @return \App\Models\Post
-     *  
+     *
+     * @param  array  $data{  title: string, content: string, expiration_date: string, is_featured: boolean }
      */
     public function handle(User $user, array $data): Post
     {

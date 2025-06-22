@@ -22,8 +22,8 @@ class UpdateAnnounementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required','string','max:255'],
-            'content' => ['required','string'],
+            'title' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
             'expiration_date' => ['nullable', 'date'],
             'is_featured' => ['boolean'],
         ];

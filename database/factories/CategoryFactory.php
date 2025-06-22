@@ -21,4 +21,4 @@ class CategoryFactory extends Factory
             'description' => $this->faker->sentence(),
         ];
     }
-} 
+}

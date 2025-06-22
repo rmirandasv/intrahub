@@ -12,7 +12,7 @@ test('should update the category name', function () {
         'description' => 'Old description',
     ]);
 
-    $updateCategory = new UpdateCategory();
+    $updateCategory = new UpdateCategory;
     $updatedCategory = $updateCategory->handle($category, [
         'name' => 'New Category Name',
         'description' => 'Old description',
@@ -29,7 +29,7 @@ test('should update the category description', function () {
         'description' => 'Old description',
     ]);
 
-    $updateCategory = new UpdateCategory();
+    $updateCategory = new UpdateCategory;
     $updatedCategory = $updateCategory->handle($category, [
         'name' => 'Test Category',
         'description' => 'New updated description',
@@ -46,7 +46,7 @@ test('should update both name and description', function () {
         'description' => 'Old description',
     ]);
 
-    $updateCategory = new UpdateCategory();
+    $updateCategory = new UpdateCategory;
     $updatedCategory = $updateCategory->handle($category, [
         'name' => 'New Name',
         'description' => 'New description',
@@ -68,7 +68,7 @@ test('should persist changes to database', function () {
         'description' => 'Updated description',
     ];
 
-    $updateCategory = new UpdateCategory();
+    $updateCategory = new UpdateCategory;
     $updatedCategory = $updateCategory->handle($category, $updateData);
 
     $this->assertDatabaseHas('categories', [
@@ -90,7 +90,7 @@ test('should return the same category instance', function () {
         'description' => 'Test description',
     ]);
 
-    $updateCategory = new UpdateCategory();
+    $updateCategory = new UpdateCategory;
     $updatedCategory = $updateCategory->handle($category, [
         'name' => 'Updated Category',
         'description' => 'Updated description',
@@ -98,4 +98,4 @@ test('should return the same category instance', function () {
 
     expect($updatedCategory)->toBe($category);
     expect($updatedCategory->id)->toBe($category->id);
-}); 
+});

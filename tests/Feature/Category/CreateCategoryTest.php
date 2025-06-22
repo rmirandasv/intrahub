@@ -47,4 +47,4 @@ test('should persist category to database', function () {
         'name' => $data['name'],
         'description' => $data['description'],
     ]);
-}); 
+});
