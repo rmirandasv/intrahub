@@ -35,9 +35,11 @@ export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardPro
             <div>
               <div className="flex items-center gap-2">
                 <p className="text-sm font-medium">{announcement.user.name}</p>
-                <Badge variant="secondary" className="text-xs">
-                  {announcement.user.is_staff ? 'Staff' : 'User'}
-                </Badge>
+                {announcement.user.is_staff === true && (
+                  <Badge variant="secondary" className="text-xs">
+                    Staff
+                  </Badge>
+                )}
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Clock className="h-3 w-3" />
