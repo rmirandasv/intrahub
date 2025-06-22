@@ -1,10 +1,9 @@
 import AnnouncementForm, { AnnouncementFormValues } from '@/components/announcement-form';
 import AppLayout from '@/layouts/app-layout';
-import { router, usePage } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function AnnouncementCreate() {
-  const { errors } = usePage().props;
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (data: AnnouncementFormValues) => {

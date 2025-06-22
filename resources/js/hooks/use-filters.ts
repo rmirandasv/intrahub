@@ -1,6 +1,6 @@
 import { router } from '@inertiajs/react';
 import queryString from 'query-string';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type FilterValue = string | string[];
 type Filters = Record<string, FilterValue>;
@@ -27,7 +27,7 @@ export function useFilters(initialFilters: Filters = {}, options: UseFilterOptio
     return { ...initialFilters, ...result };
   });
 
-  const updateUrl = (newFilters: Filters) => {
+  const updateUrl = useCallback((newFilters: Filters) => {
     const query = queryString.stringify(newFilters, {
       arrayFormat: 'bracket',
       encode: false,
@@ -44,7 +44,7 @@ export function useFilters(initialFilters: Filters = {}, options: UseFilterOptio
     } else {
       router.push({ url });
     }
-  };
+  }, [options.visitOnChange, options.replace, options.preserveState]);
 
   const toggleFilterValue = (key: string, value: string) => {
     setFilters((prev) => {
@@ -82,7 +82,7 @@ export function useFilters(initialFilters: Filters = {}, options: UseFilterOptio
     }
 
     updateUrl(filters);
-  }, [filters]);
+  }, [filters, updateUrl]);
 
   return {
     filters,
