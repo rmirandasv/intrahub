@@ -6,6 +6,7 @@ import { useInitials } from '@/hooks/use-initials';
 import { Announcement } from '@/types';
 import { Link } from '@inertiajs/react';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
+import { format, formatDistanceToNow } from 'date-fns';
 import { Clock, Edit, EllipsisVertical, Heart, MessageCircle, Share2, Trash } from 'lucide-react';
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
@@ -30,18 +31,20 @@ export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardPro
           <div className="flex items-center space-x-3">
             <Avatar>
               <AvatarImage src={announcement.user.name || '/placeholder.svg'} />
-              <AvatarFallback>{initials(announcement.user.name)}</AvatarFallback>
+              <AvatarFallback className="bg-foreground p-1 text-background">{initials(announcement.user.name)}</AvatarFallback>
             </Avatar>
             <div>
               <div className="flex items-center gap-2">
                 <p className="text-sm font-medium">{announcement.user.name}</p>
-                <Badge variant="secondary" className="text-xs">
-                  {announcement.user.is_staff ? 'Staff' : 'User'}
-                </Badge>
+                {announcement.user.is_staff === true && (
+                  <Badge variant="secondary" className="text-xs">
+                    Staff
+                  </Badge>
+                )}
               </div>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Clock className="h-3 w-3" />
-                {announcement.created_at}
+                {formatDistanceToNow(announcement.created_at, { addSuffix: true })} - {format(announcement.created_at, 'MMM d, yyyy h:mm a')}
               </div>
             </div>
           </div>
