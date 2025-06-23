@@ -1,3 +1,19 @@
+# [0.2.0](https://github.com/rmirandasv/intrahub/compare/v0.1.0...v0.2.0) (2025-06-23)
+
+
+### Bug Fixes
+
+* update RichTextEditor props to use Path type for improved type safety ([ca2c14f](https://github.com/rmirandasv/intrahub/commit/ca2c14f92304d83e15b81f3123f526428bc57d37))
+
+
+### Features
+
+* add category selection to announcement creation and editing forms ([96a74ce](https://github.com/rmirandasv/intrahub/commit/96a74ceee4631a9bd976e9d1e70637a74b6c112a))
+* enhance announcement form layout and structure ([6e78b19](https://github.com/rmirandasv/intrahub/commit/6e78b19ca1849e50cce9efef006312ab92347569))
+* improve announcements display with no-data state and icons ([45c0aa3](https://github.com/rmirandasv/intrahub/commit/45c0aa3749754b69c36c1e22ca81cfe452855501))
+* include category ID in announcement form state for creation and editing ([3d6f027](https://github.com/rmirandasv/intrahub/commit/3d6f0274c976ee6b3931ae815c5b84cd79d47614))
+* integrate BlockNote editor into announcement components and update styles ([d99e639](https://github.com/rmirandasv/intrahub/commit/d99e639a625a7687faa3fa53b0a6361461ee1425))
+
 # [0.1.0](https://github.com/rmirandasv/intrahub/compare/v0.0.2...v0.1.0) (2025-06-22)
 
 
