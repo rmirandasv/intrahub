@@ -55,15 +55,15 @@ export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardPro
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="outline">Category</Badge>
-          </div>
+          {announcement.category && (
+            <Badge variant="outline">{announcement.category.name}</Badge>
+          )}
         </div>
       </CardHeader>
       <CardContent className="pb-3">
         <div className="space-y-3">
           <h3 className="text-xl font-semibold">{announcement.title}</h3>
-          <div className="[&_.bn-editor]:px-0">
+          <div className="bg-[var(--bn-colors-editor-background)] rounded-md py-4">
             <BlockNoteView editor={editor} editable={false} theme={appearance === 'system' ? 'light' : appearance} data-theming />
           </div>
         </div>

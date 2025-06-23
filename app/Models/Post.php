@@ -22,6 +22,7 @@ class Post extends Model
         'published_at',
         'expiration_date',
         'is_featured',
+        'category_id',
     ];
 
     protected function casts(): array

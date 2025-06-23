@@ -26,6 +26,7 @@ class UpdateAnnounementRequest extends FormRequest
             'content' => ['required', 'string'],
             'expiration_date' => ['nullable', 'date'],
             'is_featured' => ['boolean'],
+            'category_id' => ['nullable', 'exists:categories,id'],
         ];
     }
 }

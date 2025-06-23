@@ -77,6 +77,7 @@ export type Post = {
   created_at: string;
   updated_at: string;
   content: string;
+  category?: Category | null;
 };
 
 export type Announcement = Post;

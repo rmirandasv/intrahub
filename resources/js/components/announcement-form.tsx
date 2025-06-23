@@ -4,21 +4,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import RichTextEditor from '@/components/ui/rich-text-editor';
 import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
+import { Category } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import RichTextEditor from '@/components/ui/rich-text-editor';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 const schema = z.object({
   title: z.string().min(1).max(100),
   content: z.string().min(1),
   expiration_date: z.date().nullable(),
   is_featured: z.boolean(),
+  category_id: z.string(),
 });
 
 export type AnnouncementFormValues = z.infer<typeof schema>;
@@ -27,9 +29,10 @@ interface AnnouncementFormProps {
   initialData?: Partial<AnnouncementFormValues>;
   onSubmit: (data: AnnouncementFormValues) => void;
   loading?: boolean;
+  categories: Category[];
 }
 
-export default function AnnouncementForm({ initialData, onSubmit, loading = false }: AnnouncementFormProps) {
+export default function AnnouncementForm({ initialData, onSubmit, loading = false, categories }: AnnouncementFormProps) {
   const form = useForm<AnnouncementFormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -69,6 +72,30 @@ export default function AnnouncementForm({ initialData, onSubmit, loading = fals
               />
               <FormField
                 control={form.control}
+                name="category_id"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                      <FormControl>
+                        <SelectContent>
+                          {categories.map((category) => (
+                            <SelectItem key={category.id} value={category.id.toString()}>
+                              {category.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </FormControl>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="content"
                 render={({ field }) => (
                   <FormItem>
@@ -98,10 +125,7 @@ export default function AnnouncementForm({ initialData, onSubmit, loading = fals
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
-                          <Button
-                            variant="outline"
-                            className={cn('w-full pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
-                          >
+                          <Button variant="outline" className={cn('w-full pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}>
                             {field.value ? format(field.value, 'PPP') : <span>Pick a date</span>}
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                           </Button>

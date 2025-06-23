@@ -2,10 +2,11 @@ import AnnouncementForm, { AnnouncementFormValues } from '@/components/announcem
 import Heading from "@/components/heading";
 import Container from "@/components/ui/container";
 import AppLayout from '@/layouts/app-layout';
+import { Category } from "@/types";
 import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function AnnouncementCreate() {
+export default function AnnouncementCreate({ categories }: { categories: Category[] }) {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (data: AnnouncementFormValues) => {
@@ -24,7 +25,7 @@ export default function AnnouncementCreate() {
     >
       <Container>
         <Heading title="Create announcement" />
-        <AnnouncementForm onSubmit={onSubmit} loading={loading} />
+        <AnnouncementForm onSubmit={onSubmit} loading={loading} categories={categories} />
       </Container>
     </AppLayout>
   );
