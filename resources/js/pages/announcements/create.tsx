@@ -1,8 +1,8 @@
 import AnnouncementForm, { AnnouncementFormValues } from '@/components/announcement-form';
-import Heading from "@/components/heading";
-import Container from "@/components/ui/container";
+import Heading from '@/components/heading';
+import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
-import { Category } from "@/types";
+import { Category } from '@/types';
 import { router } from '@inertiajs/react';
 import { useState } from 'react';
 

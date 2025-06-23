@@ -146,7 +146,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
-  --bn-colors-editor-background: #1F1F1F;
+  --bn-colors-editor-background: #1f1f1f;
 }
 
 @layer base {
@@ -161,6 +161,6 @@
     --bn-colors-editor-background: #ffffff;
   }
   .bn-container[data-theming][data-color-scheme='dark'] {
-    --bn-colors-editor-background: #1F1F1F;
+    --bn-colors-editor-background: #1f1f1f;
   }
 }

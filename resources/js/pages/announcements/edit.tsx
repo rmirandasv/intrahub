@@ -1,12 +1,12 @@
 import AnnouncementForm, { AnnouncementFormValues } from '@/components/announcement-form';
-import Heading from "@/components/heading";
-import Container from "@/components/ui/container";
+import Heading from '@/components/heading';
+import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
 import { Announcement, Category } from '@/types';
 import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function AnnouncementEdit({ announcement, categories }: { announcement: Announcement, categories: Category[] }) {
+export default function AnnouncementEdit({ announcement, categories }: { announcement: Announcement; categories: Category[] }) {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (data: AnnouncementFormValues) => {

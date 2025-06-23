@@ -6,8 +6,8 @@ import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
 import { Announcement, Paginated } from '@/types';
 import { Link } from '@inertiajs/react';
+import { Megaphone } from 'lucide-react';
 import { useState } from 'react';
-import { Folder, Megaphone } from 'lucide-react';
 
 export default function AnnouncementIndex({ announcements }: { announcements: Paginated<Announcement> }) {
   const [announcementToDelete, setAnnouncementToDelete] = useState<Announcement | null>(null);
