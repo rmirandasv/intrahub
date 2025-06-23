@@ -40,6 +40,7 @@ export default function AnnouncementForm({ initialData, onSubmit, loading = fals
       content: initialData?.content ?? '',
       expiration_date: initialData?.expiration_date ?? null,
       is_featured: initialData?.is_featured ?? false,
+      category_id: initialData?.category_id ?? '',
     },
   });
 

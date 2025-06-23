@@ -21,6 +21,7 @@ export default function AnnouncementEdit({ announcement, categories }: { announc
     content: announcement.content,
     expiration_date: announcement.expiration_date ? new Date(announcement.expiration_date) : null,
     is_featured: announcement.is_featured,
+    category_id: announcement.category?.id.toString() ?? '',
   };
 
   return (
