@@ -12,6 +12,7 @@ import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import RichTextEditor from '@/components/ui/rich-text-editor';
 
 const schema = z.object({
   title: z.string().min(1).max(100),
@@ -73,7 +74,7 @@ export default function AnnouncementForm({ initialData, onSubmit, loading = fals
                   <FormItem>
                     <FormLabel>Content</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Content" {...field} />
+                      <RichTextEditor field={field} label="Content" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

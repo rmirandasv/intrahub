@@ -110,6 +110,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.87 0 0);
+  --bn-colors-editor-background: #ffffff;
 }
 
 .dark {
@@ -145,6 +146,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+  --bn-colors-editor-background: #1F1F1F;
 }
 
 @layer base {
@@ -154,5 +156,11 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+  .bn-container[data-theming][data-color-scheme] {
+    --bn-colors-editor-background: #ffffff;
+  }
+  .bn-container[data-theming][data-color-scheme='dark'] {
+    --bn-colors-editor-background: #1F1F1F;
   }
 }
