@@ -3,14 +3,13 @@ import '@blocknote/core/fonts/inter.css';
 import { BlockNoteView } from '@blocknote/mantine';
 import '@blocknote/mantine/style.css';
 import { useCreateBlockNote } from '@blocknote/react';
-import { ControllerRenderProps, FieldValues } from 'react-hook-form';
+import { ControllerRenderProps, FieldValues, Path } from 'react-hook-form';
 
 interface RichTextEditorProps<T extends FieldValues> {
-  field: ControllerRenderProps<T, any>;
-  label: string;
+  field: ControllerRenderProps<T, Path<T>>;
 }
 
-export default function RichTextEditor<T extends FieldValues>({ field, label }: RichTextEditorProps<T>) {
+export default function RichTextEditor<T extends FieldValues>({ field }: RichTextEditorProps<T>) {
   const { appearance } = useAppearance();
   const editor = useCreateBlockNote({
     initialContent: field.value ? JSON.parse(field.value) : undefined,
