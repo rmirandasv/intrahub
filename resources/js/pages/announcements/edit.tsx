@@ -1,10 +1,12 @@
 import AnnouncementForm, { AnnouncementFormValues } from '@/components/announcement-form';
+import Heading from '@/components/heading';
+import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
-import { Announcement } from '@/types';
+import { Announcement, Category } from '@/types';
 import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function AnnouncementEdit({ announcement }: { announcement: Announcement }) {
+export default function AnnouncementEdit({ announcement, categories }: { announcement: Announcement; categories: Category[] }) {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (data: AnnouncementFormValues) => {
@@ -19,6 +21,7 @@ export default function AnnouncementEdit({ announcement }: { announcement: Annou
     content: announcement.content,
     expiration_date: announcement.expiration_date ? new Date(announcement.expiration_date) : null,
     is_featured: announcement.is_featured,
+    category_id: announcement.category?.id.toString() ?? '',
   };
 
   return (
@@ -28,15 +31,10 @@ export default function AnnouncementEdit({ announcement }: { announcement: Annou
         { title: `Edit Announcement ${announcement.id}`, href: `/announcements/${announcement.id}/edit` },
       ]}
     >
-      <div className="m-4 min-h-[100vh] flex-1 rounded-xl bg-muted/50 p-4">
-        <div className="flex flex-col gap-4">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Edit Announcement</h1>
-            <p className="text-muted-foreground">Edit the announcement to share important information with your team and stakeholders.</p>
-          </div>
-          <AnnouncementForm onSubmit={onSubmit} loading={loading} initialData={initialData} />
-        </div>
-      </div>
+      <Container>
+        <Heading title="Edit Announcement" />
+        <AnnouncementForm onSubmit={onSubmit} loading={loading} initialData={initialData} categories={categories} />
+      </Container>
     </AppLayout>
   );
 }

@@ -1,9 +1,12 @@
 import AnnouncementForm, { AnnouncementFormValues } from '@/components/announcement-form';
+import Heading from '@/components/heading';
+import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
+import { Category } from '@/types';
 import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function AnnouncementCreate() {
+export default function AnnouncementCreate({ categories }: { categories: Category[] }) {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (data: AnnouncementFormValues) => {
@@ -20,15 +23,10 @@ export default function AnnouncementCreate() {
         { title: 'Create Announcement', href: '/announcements/create' },
       ]}
     >
-      <div className="m-4 min-h-[100vh] flex-1 rounded-xl bg-muted/50 p-4">
-        <div className="flex flex-col gap-4">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Create Announcement</h1>
-            <p className="text-muted-foreground">Add a new announcement to share important information with your team and stakeholders.</p>
-          </div>
-          <AnnouncementForm onSubmit={onSubmit} loading={loading} />
-        </div>
-      </div>
+      <Container>
+        <Heading title="Create announcement" />
+        <AnnouncementForm onSubmit={onSubmit} loading={loading} categories={categories} />
+      </Container>
     </AppLayout>
   );
 }

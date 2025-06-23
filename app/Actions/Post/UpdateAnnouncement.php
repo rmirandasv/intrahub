@@ -9,7 +9,7 @@ class UpdateAnnouncement
     /**
      * Update the announcement with the given data.
      *
-     * @param  array  $data{  title: string, content: string, expiration_date: string, is_featured: boolean }
+     * @param  array  $data{  title: string, content: string, expiration_date: string, is_featured: boolean, category_id: string | null }
      */
     public function handle(Post $post, array $data): void
     {
@@ -18,6 +18,7 @@ class UpdateAnnouncement
             'content' => $data['content'],
             'expiration_date' => $data['expiration_date'] ?? null,
             'is_featured' => $data['is_featured'] ?? false,
+            'category_id' => $data['category_id'] ?? null,
         ]);
     }
 }

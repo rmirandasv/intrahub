@@ -2,8 +2,11 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { useAppearance } from '@/hooks/use-appearance';
 import { useInitials } from '@/hooks/use-initials';
 import { Announcement } from '@/types';
+import { BlockNoteView } from '@blocknote/mantine';
+import { useCreateBlockNote } from '@blocknote/react';
 import { Link } from '@inertiajs/react';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
 import { format, formatDistanceToNow } from 'date-fns';
@@ -17,6 +20,10 @@ interface AnnouncementCardProps {
 
 export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardProps) {
   const initials = useInitials();
+  const { appearance } = useAppearance();
+  const editor = useCreateBlockNote({
+    initialContent: announcement.content ? JSON.parse(announcement.content) : [],
+  });
 
   const handleDelete = () => {
     if (onDelete) {
@@ -48,15 +55,15 @@ export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardPro
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="outline">Category</Badge>
-          </div>
+          {announcement.category && <Badge variant="outline">{announcement.category.name}</Badge>}
         </div>
       </CardHeader>
       <CardContent className="pb-3">
         <div className="space-y-3">
           <h3 className="text-xl font-semibold">{announcement.title}</h3>
-          <p className="leading-relaxed text-muted-foreground">{announcement.content}</p>
+          <div className="rounded-md bg-[var(--bn-colors-editor-background)] py-4">
+            <BlockNoteView editor={editor} editable={false} theme={appearance === 'system' ? 'light' : appearance} data-theming />
+          </div>
         </div>
       </CardContent>
       <CardFooter className="pt-0">

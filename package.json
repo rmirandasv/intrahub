@@ -40,6 +40,9 @@
     "typescript-eslint": "^8.23.0"
   },
   "dependencies": {
+    "@blocknote/core": "^0.31.3",
+    "@blocknote/mantine": "^0.31.3",
+    "@blocknote/react": "^0.31.3",
     "@headlessui/react": "^2.2.0",
     "@hookform/resolvers": "^5.1.1",
     "@inertiajs/react": "^2.0.0",

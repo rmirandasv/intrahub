@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title', 100);
-            $table->text('content');
+            $table->json('content');
             $table->string('post_type');
             $table->unsignedBigInteger('user_id');
             $table->datetime('published_at')->nullable();

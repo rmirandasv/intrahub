@@ -7,6 +7,7 @@ use App\Actions\Post\DeletePost;
 use App\Actions\Post\UpdateAnnouncement;
 use App\Http\Requests\StoreAnnouncementRequest;
 use App\Http\Requests\UpdateAnnounementRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -19,7 +20,7 @@ class AnnouncementController extends Controller
         Gate::authorize('viewAny', Post::class);
 
         $announcements = Post::query()
-            ->with(relations: ['user'])
+            ->with(relations: ['user', 'category'])
             ->announcements()
             ->paginate(10);
 
@@ -32,7 +33,11 @@ class AnnouncementController extends Controller
     {
         Gate::authorize('create', Post::class);
 
-        return Inertia::render('announcements/create');
+        $categories = Category::all();
+
+        return Inertia::render(component: 'announcements/create', props: [
+            'categories' => $categories,
+        ]);
     }
 
     public function store(StoreAnnouncementRequest $request, CreateAnnouncement $createAnnouncement)
@@ -44,18 +49,16 @@ class AnnouncementController extends Controller
         return redirect()->route('announcements.index');
     }
 
-    public function show(Post $announcement)
-    {
-        Gate::authorize('view', $announcement);
-
-        return Inertia::render('announcements/show', ['announcement' => $announcement]);
-    }
-
     public function edit(Post $announcement)
     {
         Gate::authorize('update', $announcement);
 
-        return Inertia::render('announcements/edit', ['announcement' => $announcement]);
+        $categories = Category::all();
+
+        return Inertia::render(component: 'announcements/edit', props: [
+            'announcement' => $announcement->load(relations: ['category']),
+            'categories' => $categories,
+        ]);
     }
 
     public function update(UpdateAnnounementRequest $request, Post $announcement, UpdateAnnouncement $updateAnnouncement)
