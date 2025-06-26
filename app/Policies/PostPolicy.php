@@ -62,4 +62,9 @@ class PostPolicy
     {
         return false;
     }
+
+    public function like(User $user, Post $post): bool
+    {
+        return true;
+    }
 }

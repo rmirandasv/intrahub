@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostLikeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -48,6 +49,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         '/announcements/{announcement}',
         [AnnouncementController::class, 'destroy']
     )->name('announcements.destroy');
+
+    Route::post(
+        '/posts/{post}/like',
+        [PostLikeController::class, 'toggle']
+    )->name('posts.like.toggle');
 
     Route::get(
         '/categories',
