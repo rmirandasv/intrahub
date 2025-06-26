@@ -78,6 +78,8 @@ export type Post = {
   updated_at: string;
   content: string;
   category?: Category | null;
+  likes_count: number;
+  is_liked: boolean;
 };
 
 export type Announcement = Post;

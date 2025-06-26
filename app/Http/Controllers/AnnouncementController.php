@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateAnnounementRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
@@ -19,9 +20,25 @@ class AnnouncementController extends Controller
     {
         Gate::authorize('viewAny', Post::class);
 
+        $user = Auth::user();
+        
         $announcements = Post::query()
             ->with(relations: ['user', 'category'])
             ->announcements()
+            ->withCount('likes')
+            ->when($user, function ($query) use ($user) {
+                $query->addSelect([
+                    'is_liked' => function ($query) use ($user) {
+                        $query->selectRaw('COUNT(*) > 0')
+                            ->from('post_likes')
+                            ->whereColumn('post_likes.post_id', 'posts.id')
+                            ->where('post_likes.user_id', $user->id);
+                    }
+                ]);
+            })
+            ->when(!$user, function ($query) {
+                $query->addSelect(DB::raw('0 as is_liked'));
+            })
             ->paginate(10);
 
         return Inertia::render(component: 'announcements/index', props: [
