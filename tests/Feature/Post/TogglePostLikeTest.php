@@ -14,16 +14,18 @@ class TogglePostLikeTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     private Post $post;
+
     private TogglePostLike $action;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->user = User::factory()->create();
         $this->post = Post::factory()->create();
-        $this->action = new TogglePostLike();
+        $this->action = new TogglePostLike;
     }
 
     public function test_it_can_add_a_like_to_a_post()
@@ -88,7 +90,7 @@ class TogglePostLikeTest extends TestCase
 
         // Should have 3 likes total
         $this->assertEquals(3, $this->post->likes()->count());
-        
+
         // Each user should have their own like record
         $this->assertDatabaseHas('post_likes', [
             'user_id' => $this->user->id,
@@ -122,4 +124,4 @@ class TogglePostLikeTest extends TestCase
         // User should have 3 likes total
         $this->assertEquals(3, $this->user->likes()->count());
     }
-} 
+}

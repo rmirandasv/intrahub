@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\PostType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Enums\PostType;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>

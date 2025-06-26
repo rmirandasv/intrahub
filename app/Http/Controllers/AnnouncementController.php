@@ -21,7 +21,7 @@ class AnnouncementController extends Controller
         Gate::authorize('viewAny', Post::class);
 
         $user = Auth::user();
-        
+
         $announcements = Post::query()
             ->with(relations: ['user', 'category'])
             ->announcements()
@@ -33,10 +33,10 @@ class AnnouncementController extends Controller
                             ->from('post_likes')
                             ->whereColumn('post_likes.post_id', 'posts.id')
                             ->where('post_likes.user_id', $user->id);
-                    }
+                    },
                 ]);
             })
-            ->when(!$user, function ($query) {
+            ->when(! $user, function ($query) {
                 $query->addSelect(DB::raw('0 as is_liked'));
             })
             ->paginate(10);

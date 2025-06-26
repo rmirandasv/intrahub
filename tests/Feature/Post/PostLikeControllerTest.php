@@ -12,12 +12,13 @@ class PostLikeControllerTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     private Post $post;
 
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->user = User::factory()->create();
         $this->post = Post::factory()->create();
     }
@@ -37,7 +38,7 @@ class PostLikeControllerTest extends TestCase
         $response->assertRedirect();
         $response->assertSessionHas('flash.type', 'success');
         $response->assertSessionHas('flash.message', 'Post liked successfully');
-        
+
         $this->assertDatabaseHas('post_likes', [
             'user_id' => $this->user->id,
             'post_id' => $this->post->id,
@@ -57,7 +58,7 @@ class PostLikeControllerTest extends TestCase
         $response->assertRedirect();
         $response->assertSessionHas('flash.type', 'success');
         $response->assertSessionHas('flash.message', 'Post unliked successfully');
-        
+
         $this->assertDatabaseMissing('post_likes', [
             'user_id' => $this->user->id,
             'post_id' => $this->post->id,
@@ -72,4 +73,4 @@ class PostLikeControllerTest extends TestCase
 
         $response->assertRedirect('/announcements');
     }
-} 
+}

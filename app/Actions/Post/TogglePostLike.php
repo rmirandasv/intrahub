@@ -10,12 +10,10 @@ class TogglePostLike
 {
     /**
      * Toggle the like status for a post by a user.
-     * 
+     *
      * If the user has already liked the post, the like will be removed.
      * If the user hasn't liked the post, a new like will be created.
-     * 
-     * @param Post $post
-     * @param User $user
+     *
      * @return bool Returns true if a like was added, false if a like was removed
      */
     public function handle(Post $post, User $user): bool
@@ -26,6 +24,7 @@ class TogglePostLike
 
         if ($existingLike) {
             $existingLike->delete();
+
             return false;
         }
 
@@ -36,4 +35,4 @@ class TogglePostLike
 
         return true;
     }
-} 
+}

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Actions\Post\TogglePostLike;
 use App\Models\Post;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
