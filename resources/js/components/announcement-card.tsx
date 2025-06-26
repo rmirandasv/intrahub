@@ -70,11 +70,7 @@ export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardPro
       <CardFooter className="pt-0">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center space-x-4">
-            <LikeButton
-              postId={announcement.id}
-              initialLikesCount={announcement.likes_count}
-              isLiked={announcement.is_liked}
-            />
+            <LikeButton postId={announcement.id} initialLikesCount={announcement.likes_count} isLiked={announcement.is_liked} />
             <Button variant="ghost" size="sm">
               <MessageCircle className="mr-1 h-4 w-4" />
               {2}

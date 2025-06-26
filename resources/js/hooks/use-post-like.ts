@@ -23,23 +23,27 @@ export function usePostLike({ postId, initialLikesCount, isLiked: initialIsLiked
     // Optimistic update
     const newIsLiked = !isLiked;
     const newLikesCount = newIsLiked ? likesCount + 1 : likesCount - 1;
-    
+
     setIsLiked(newIsLiked);
     setLikesCount(newLikesCount);
     setIsLoading(true);
 
     // Make the actual request
-    router.post(route('posts.like.toggle', postId), {}, {
-      preserveScroll: true,
-      onError: () => {
-        // Revert optimistic update on error
-        setIsLiked(initialIsLiked);
-        setLikesCount(initialLikesCount);
+    router.post(
+      route('posts.like.toggle', postId),
+      {},
+      {
+        preserveScroll: true,
+        onError: () => {
+          // Revert optimistic update on error
+          setIsLiked(initialIsLiked);
+          setLikesCount(initialLikesCount);
+        },
+        onFinish: () => {
+          setIsLoading(false);
+        },
       },
-      onFinish: () => {
-        setIsLoading(false);
-      },
-    });
+    );
   };
 
   return {
@@ -48,4 +52,4 @@ export function usePostLike({ postId, initialLikesCount, isLiked: initialIsLiked
     isLoading,
     toggleLike,
   };
-} 
+}
