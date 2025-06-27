@@ -7,7 +7,7 @@ import { useInitials } from '@/hooks/use-initials';
 import { PostComment } from '@/types';
 import { router } from '@inertiajs/react';
 import { format, formatDistanceToNow } from 'date-fns';
-import { Clock, Edit, EllipsisVertical, Trash, Check, X } from 'lucide-react';
+import { Check, Clock, Edit, EllipsisVertical, Trash, X } from 'lucide-react';
 import { useState } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
@@ -19,7 +19,7 @@ interface CommentItemProps {
   canDelete?: boolean;
 }
 
-export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDelete = false }: CommentItemProps) {
+export function CommentItem({ comment, canEdit = false, canDelete = false }: CommentItemProps) {
   const initials = useInitials();
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(comment.content);
@@ -43,25 +43,29 @@ export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDel
     }
 
     setIsSubmitting(true);
-    
+
     try {
       const postId = comment.post_id || comment.post_id;
-      
+
       if (!postId) {
         throw new Error('No se pudo encontrar el ID del post');
       }
 
-      await router.put(`/announcements/${postId}/comments/${comment.id}`, {
-        content: editContent.trim()
-      }, {
-        onFinish: () => {
-          setIsSubmitting(false);
-          setIsEditing(false);
+      await router.put(
+        `/announcements/${postId}/comments/${comment.id}`,
+        {
+          content: editContent.trim(),
         },
-        onError: () => {
-          setIsSubmitting(false);
-        }
-      });
+        {
+          onFinish: () => {
+            setIsSubmitting(false);
+            setIsEditing(false);
+          },
+          onError: () => {
+            setIsSubmitting(false);
+          },
+        },
+      );
     } catch (error) {
       console.error('Error updating comment:', error);
       setIsSubmitting(false);
@@ -75,10 +79,10 @@ export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDel
     if (!confirmed) return;
 
     setIsDeleting(true);
-    
+
     try {
       const postId = comment.post_id;
-      
+
       if (!postId) {
         throw new Error('No se pudo encontrar el ID del post');
       }
@@ -89,7 +93,7 @@ export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDel
         },
         onError: () => {
           setIsDeleting(false);
-        }
+        },
       });
     } catch (error) {
       console.error('Error deleting comment:', error);
@@ -111,10 +115,8 @@ export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDel
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3">
             <Avatar className="h-8 w-8">
-              <AvatarImage  /> {/* TODO: Add avatar */}
-              <AvatarFallback className="bg-foreground p-1 text-background text-xs">
-                {initials(comment.user.name)}
-              </AvatarFallback>
+              <AvatarImage /> {/* TODO: Add avatar */}
+              <AvatarFallback className="bg-foreground p-1 text-xs text-background">{initials(comment.user.name)}</AvatarFallback>
             </Avatar>
             <div>
               <div className="flex items-center gap-2">
@@ -128,11 +130,7 @@ export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDel
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Clock className="h-3 w-3" />
                 {formatDistanceToNow(comment.created_at, { addSuffix: true })} - {format(comment.created_at, 'MMM d, yyyy h:mm a')}
-                {comment.updated_at !== comment.created_at && (
-                  <span className="text-xs text-muted-foreground">
-                    (edited)
-                  </span>
-                )}
+                {comment.updated_at !== comment.created_at && <span className="text-xs text-muted-foreground">(edited)</span>}
               </div>
             </div>
           </div>
@@ -151,11 +149,7 @@ export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDel
                   </DropdownMenuItem>
                 )}
                 {canDelete && (
-                  <DropdownMenuItem 
-                    onClick={handleDelete} 
-                    className="text-destructive"
-                    disabled={isDeleting}
-                  >
+                  <DropdownMenuItem onClick={handleDelete} className="text-destructive" disabled={isDeleting}>
                     <Trash className="mr-2 h-4 w-4" />
                     {isDeleting ? 'Deleting...' : 'Delete'}
                   </DropdownMenuItem>
@@ -174,13 +168,7 @@ export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDel
               >
                 <Check className="h-4 w-4" />
               </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleCancel}
-                disabled={isSubmitting}
-                className="h-8 w-8 p-0"
-              >
+              <Button variant="ghost" size="sm" onClick={handleCancel} disabled={isSubmitting} className="h-8 w-8 p-0">
                 <X className="h-4 w-4" />
               </Button>
             </div>
@@ -201,17 +189,13 @@ export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDel
             />
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <span>Press Cmd+Enter to save, Esc to cancel</span>
-              <span className="text-right">
-                {editContent.length}/255
-              </span>
+              <span className="text-right">{editContent.length}/255</span>
             </div>
           </div>
         ) : (
-          <div className="text-sm leading-relaxed">
-            {comment.content}
-          </div>
+          <div className="text-sm leading-relaxed">{comment.content}</div>
         )}
       </CardContent>
     </Card>
   );
-} 
+}

@@ -9,16 +9,10 @@ interface CommentsListProps {
   canDeleteComments?: boolean;
 }
 
-export function CommentsList({ 
-  comments, 
-  onEditComment, 
-  onDeleteComment, 
-  canEditComments = false, 
-  canDeleteComments = false 
-}: CommentsListProps) {
+export function CommentsList({ comments, onEditComment, onDeleteComment, canEditComments = false, canDeleteComments = false }: CommentsListProps) {
   if (comments.length === 0) {
     return (
-      <div className="text-center py-8">
+      <div className="py-8 text-center">
         <p className="text-muted-foreground">No comments yet. Be the first to comment!</p>
       </div>
     );
@@ -38,4 +32,4 @@ export function CommentsList({
       ))}
     </div>
   );
-} 
+}

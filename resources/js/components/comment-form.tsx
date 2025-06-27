@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import { useState } from 'react';
 import { Send } from 'lucide-react';
+import { useState } from 'react';
 
 interface CommentFormProps {
   onSubmit: (content: string) => void;
@@ -10,7 +10,7 @@ interface CommentFormProps {
   placeholder?: string;
 }
 
-export function CommentForm({ onSubmit, isLoading = false, placeholder = "Write your comment..." }: CommentFormProps) {
+export function CommentForm({ onSubmit, isLoading = false, placeholder = 'Write your comment...' }: CommentFormProps) {
   const [content, setContent] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -36,11 +36,7 @@ export function CommentForm({ onSubmit, isLoading = false, placeholder = "Write 
             disabled={isLoading}
           />
           <div className="flex justify-end">
-            <Button 
-              type="submit" 
-              disabled={!content.trim() || isLoading}
-              className="flex items-center gap-2"
-            >
+            <Button type="submit" disabled={!content.trim() || isLoading} className="flex items-center gap-2">
               <Send className="h-4 w-4" />
               {isLoading ? 'Sending...' : 'Send comment'}
             </Button>
@@ -49,4 +45,4 @@ export function CommentForm({ onSubmit, isLoading = false, placeholder = "Write 
       </CardContent>
     </Card>
   );
-} 
+}
