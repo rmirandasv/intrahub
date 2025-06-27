@@ -56,6 +56,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         [PostCommentController::class, 'store']
     )->name('announcements.comments.store');
 
+    Route::put(
+        '/announcements/{announcement}/comments/{comment}',
+        [PostCommentController::class, 'update']
+    )->name('announcements.comments.update');
+
     Route::post(
         '/posts/{post}/like',
         [PostLikeController::class, 'toggle']

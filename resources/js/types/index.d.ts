@@ -69,6 +69,8 @@ export type PostType = 'announcement' | 'benefit' | 'event';
 export type PostComment = {
   id: number;
   content: string;
+  post_id: number;
+  user_id: number;
   user: User;
   created_at: string;
   updated_at: string;

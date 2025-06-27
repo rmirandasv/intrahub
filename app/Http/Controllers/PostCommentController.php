@@ -19,11 +19,11 @@ class PostCommentController extends Controller
         return redirect()->route('announcements.show', $announcement);
     }
 
-    public function update(UpdatePostCommentRequest $request, PostComment $postComment, UpdatePostComment $updatePostComment)
+    public function update(UpdatePostCommentRequest $request, Post $announcement, PostComment $comment, UpdatePostComment $updatePostComment)
     {
-        $updatePostComment->handle($postComment, $request->validated());
+        $updatePostComment->handle($comment, $request->validated());
 
-        return redirect()->route('announcements.show', $postComment->post);
+        return redirect()->route('announcements.show', $comment->post);
     }
 
     public function destroy(PostComment $postComment, DeletePostComment $deletePostComment)
