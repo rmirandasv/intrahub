@@ -52,9 +52,9 @@ class AnnouncementController extends Controller
         Gate::authorize('view', $announcement);
 
         $announcement->load(relations: [
-            'user', 
-            'category', 
-            'comments', 
+            'user',
+            'category',
+            'comments',
             'comments.user',
         ]);
 

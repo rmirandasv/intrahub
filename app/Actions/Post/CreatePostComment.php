@@ -8,12 +8,6 @@ use App\Models\User;
 
 class CreatePostComment
 {
-    /**
-     * @param Post $post
-     * @param User $user
-     * @param array $data
-     * @return PostComment
-     */
     public function handle(Post $post, User $user, array $data): PostComment
     {
         return PostComment::create([
