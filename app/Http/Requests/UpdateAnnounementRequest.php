@@ -27,6 +27,8 @@ class UpdateAnnounementRequest extends FormRequest
             'expiration_date' => ['nullable', 'date'],
             'is_featured' => ['boolean'],
             'category_id' => ['nullable', 'exists:categories,id'],
+            'images' => ['nullable', 'array'],
+            'images.*' => ['nullable', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
     }
 }
