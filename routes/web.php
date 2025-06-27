@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostLikeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -49,6 +50,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         '/announcements/{announcement}',
         [AnnouncementController::class, 'destroy']
     )->name('announcements.destroy');
+
+    Route::post(
+        '/announcements/{announcement}/comments',
+        [PostCommentController::class, 'store']
+    )->name('announcements.comments.store');
 
     Route::post(
         '/posts/{post}/like',

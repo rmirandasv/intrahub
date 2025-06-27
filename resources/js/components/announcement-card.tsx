@@ -71,9 +71,11 @@ export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardPro
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center space-x-4">
             <LikeButton postId={announcement.id} initialLikesCount={announcement.likes_count} isLiked={announcement.is_liked} />
-            <Button variant="ghost" size="sm">
-              <MessageCircle className="mr-1 h-4 w-4" />
-              {2}
+            <Button variant="ghost" size="sm" asChild>
+              <Link href={`/announcements/${announcement.id}`} className="flex items-center gap-2">
+                <MessageCircle className="mr-1 h-4 w-4" />
+                {announcement.comments_count}
+              </Link>
             </Button>
             <Button variant="ghost" size="sm">
               <Share2 className="mr-1 h-4 w-4" />

@@ -26,6 +26,7 @@ class AnnouncementController extends Controller
             ->with(relations: ['user', 'category'])
             ->announcements()
             ->withCount('likes')
+            ->withCount('comments')
             ->when($user, function ($query) use ($user) {
                 $query->addSelect([
                     'is_liked' => function ($query) use ($user) {
@@ -43,6 +44,22 @@ class AnnouncementController extends Controller
 
         return Inertia::render(component: 'announcements/index', props: [
             'announcements' => $announcements,
+        ]);
+    }
+
+    public function show(Post $announcement)
+    {
+        Gate::authorize('view', $announcement);
+
+        $announcement->load(relations: [
+            'user', 
+            'category', 
+            'comments', 
+            'comments.user',
+        ]);
+
+        return Inertia::render(component: 'announcements/show', props: [
+            'announcement' => $announcement,
         ]);
     }
 

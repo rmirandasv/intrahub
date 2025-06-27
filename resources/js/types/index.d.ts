@@ -66,6 +66,14 @@ export type User = {
 
 export type PostType = 'announcement' | 'benefit' | 'event';
 
+export type PostComment = {
+  id: number;
+  content: string;
+  user: User;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Post = {
   id: number;
   title: string;
@@ -80,6 +88,8 @@ export type Post = {
   category?: Category | null;
   likes_count: number;
   is_liked: boolean;
+  comments: PostComment[];
+  comments_count: number;
 };
 
 export type Announcement = Post;
