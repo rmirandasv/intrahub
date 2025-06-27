@@ -14,6 +14,7 @@ import { CalendarIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import ImageUpload from './ui/image-upload';
 
 const schema = z.object({
   title: z.string().min(1).max(100),
@@ -21,6 +22,7 @@ const schema = z.object({
   expiration_date: z.date().nullable(),
   is_featured: z.boolean(),
   category_id: z.string(),
+  images: z.array(z.instanceof(File)).optional(),
 });
 
 export type AnnouncementFormValues = z.infer<typeof schema>;
@@ -41,6 +43,7 @@ export default function AnnouncementForm({ initialData, onSubmit, loading = fals
       expiration_date: initialData?.expiration_date ?? null,
       is_featured: initialData?.is_featured ?? false,
       category_id: initialData?.category_id ?? '',
+      images: initialData?.images ?? [],
     },
   });
 
@@ -102,8 +105,30 @@ export default function AnnouncementForm({ initialData, onSubmit, loading = fals
                   <FormItem>
                     <FormLabel>Content</FormLabel>
                     <FormControl>
-                      <RichTextEditor field={field} label="Content" />
+                      <RichTextEditor field={field} />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="images"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Images</FormLabel>
+                    <FormControl>
+                      <ImageUpload
+                        value={field.value}
+                        onChange={field.onChange}
+                        maxFiles={5}
+                        maxSize={5 * 1024 * 1024} // 5MB
+                        disabled={loading}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Upload up to 5 images (JPEG, PNG, GIF, WebP) up to 5MB each.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

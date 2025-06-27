@@ -13,6 +13,7 @@ export default function AnnouncementEdit({ announcement, categories }: { announc
     setLoading(true);
     router.put(`/announcements/${announcement.id}`, data, {
       onFinish: () => setLoading(false),
+      forceFormData: true,
     });
   };
 
@@ -22,6 +23,7 @@ export default function AnnouncementEdit({ announcement, categories }: { announc
     expiration_date: announcement.expiration_date ? new Date(announcement.expiration_date) : null,
     is_featured: announcement.is_featured,
     category_id: announcement.category?.id.toString() ?? '',
+    images: [], // Images will be handled separately in edit mode
   };
 
   return (

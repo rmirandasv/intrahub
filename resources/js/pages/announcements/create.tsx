@@ -13,6 +13,7 @@ export default function AnnouncementCreate({ categories }: { categories: Categor
     setLoading(true);
     router.post('/announcements', data, {
       onFinish: () => setLoading(false),
+      forceFormData: true,
     });
   };
 

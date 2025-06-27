@@ -26,7 +26,13 @@ class CreateAnnouncement
         ]);
 
         if ($data['images']) {
-            $post->addMediaFromUrl($data['images'])->toMediaCollection('announcements');
+            if (is_array($data['images'])) {
+                foreach ($data['images'] as $image) {
+                    $post->addMedia($image)->toMediaCollection('announcements');
+                }
+            } else {
+                $post->addMedia($data['images'])->toMediaCollection('announcements');
+            }
         }
 
         return $post;
