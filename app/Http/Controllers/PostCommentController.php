@@ -26,10 +26,10 @@ class PostCommentController extends Controller
         return redirect()->route('announcements.show', $comment->post);
     }
 
-    public function destroy(PostComment $postComment, DeletePostComment $deletePostComment)
+    public function destroy(Post $announcement, PostComment $comment, DeletePostComment $deletePostComment)
     {
-        $deletePostComment->handle($postComment);
+        $deletePostComment->handle($comment);
 
-        return redirect()->route('announcements.show', $postComment->post);
+        return redirect()->route('announcements.show', $announcement);
     }
 }

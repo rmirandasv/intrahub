@@ -61,6 +61,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         [PostCommentController::class, 'update']
     )->name('announcements.comments.update');
 
+    Route::delete(
+        '/announcements/{announcement}/comments/{comment}',
+        [PostCommentController::class, 'destroy']
+    )->name('announcements.comments.destroy');
+
     Route::post(
         '/posts/{post}/like',
         [PostLikeController::class, 'toggle']

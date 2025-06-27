@@ -24,6 +24,7 @@ export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDel
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(comment.content);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -67,9 +68,32 @@ export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDel
     }
   };
 
-  const handleDelete = () => {
-    if (onDelete) {
-      onDelete(comment);
+  const handleDelete = async () => {
+    if (!canDelete) return;
+
+    const confirmed = confirm('¿Estás seguro de que quieres eliminar este comentario?');
+    if (!confirmed) return;
+
+    setIsDeleting(true);
+    
+    try {
+      const postId = comment.post_id;
+      
+      if (!postId) {
+        throw new Error('No se pudo encontrar el ID del post');
+      }
+
+      await router.delete(`/announcements/${postId}/comments/${comment.id}`, {
+        onFinish: () => {
+          setIsDeleting(false);
+        },
+        onError: () => {
+          setIsDeleting(false);
+        }
+      });
+    } catch (error) {
+      console.error('Error deleting comment:', error);
+      setIsDeleting(false);
     }
   };
 
@@ -115,21 +139,25 @@ export function CommentItem({ comment, onEdit, onDelete, canEdit = false, canDel
           {(canEdit || canDelete) && !isEditing && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" disabled={isDeleting}>
                   <EllipsisVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 {canEdit && (
-                  <DropdownMenuItem onClick={handleEdit}>
+                  <DropdownMenuItem onClick={handleEdit} disabled={isDeleting}>
                     <Edit className="mr-2 h-4 w-4" />
                     Edit
                   </DropdownMenuItem>
                 )}
                 {canDelete && (
-                  <DropdownMenuItem onClick={handleDelete} className="text-destructive">
+                  <DropdownMenuItem 
+                    onClick={handleDelete} 
+                    className="text-destructive"
+                    disabled={isDeleting}
+                  >
                     <Trash className="mr-2 h-4 w-4" />
-                    Delete
+                    {isDeleting ? 'Deleting...' : 'Delete'}
                   </DropdownMenuItem>
                 )}
               </DropdownMenuContent>
