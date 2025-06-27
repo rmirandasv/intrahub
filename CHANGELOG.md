@@ -1,3 +1,14 @@
+# [0.3.0](https://github.com/rmirandasv/intrahub/compare/v0.2.0...v0.3.0) (2025-06-27)
+
+
+### Features
+
+* announcements like functionality  with user interaction ([efea26b](https://github.com/rmirandasv/intrahub/commit/efea26b0c5cb96889e02a026d635e5c8e31e7ade))
+* comment editing functionality with inline editing ([bf4b3a1](https://github.com/rmirandasv/intrahub/commit/bf4b3a17aceb60b2c45aad3f400f21f570e1526e))
+* create announcement post comment ([015f2f5](https://github.com/rmirandasv/intrahub/commit/015f2f575acdcc1916728f0cb47ca2f8477823bc))
+* implement comment deletion functionality with confirmation ([e46548c](https://github.com/rmirandasv/intrahub/commit/e46548cd4181e9af1728ffbf63212f816de5a651))
+* post liking functionality ([0c85b98](https://github.com/rmirandasv/intrahub/commit/0c85b98c148856ded7b011969481281e5f3b1b3b))
+
 # [0.2.0](https://github.com/rmirandasv/intrahub/compare/v0.1.0...v0.2.0) (2025-06-23)
 
 
