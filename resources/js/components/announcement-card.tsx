@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { LikeButton } from '@/components/ui/like-button';
 import { useAppearance } from '@/hooks/use-appearance';
 import { useInitials } from '@/hooks/use-initials';
 import { Announcement } from '@/types';
@@ -10,7 +11,7 @@ import { useCreateBlockNote } from '@blocknote/react';
 import { Link } from '@inertiajs/react';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
 import { format, formatDistanceToNow } from 'date-fns';
-import { Clock, Edit, EllipsisVertical, Heart, MessageCircle, Share2, Trash } from 'lucide-react';
+import { Clock, Edit, EllipsisVertical, MessageCircle, Share2, Trash } from 'lucide-react';
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 interface AnnouncementCardProps {
@@ -69,13 +70,12 @@ export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardPro
       <CardFooter className="pt-0">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
-              <Heart className="mr-1 h-4 w-4" />
-              {1}
-            </Button>
-            <Button variant="ghost" size="sm">
-              <MessageCircle className="mr-1 h-4 w-4" />
-              {2}
+            <LikeButton postId={announcement.id} initialLikesCount={announcement.likes_count} isLiked={announcement.is_liked} />
+            <Button variant="ghost" size="sm" asChild>
+              <Link href={`/announcements/${announcement.id}`} className="flex items-center gap-2">
+                <MessageCircle className="mr-1 h-4 w-4" />
+                {announcement.comments_count}
+              </Link>
             </Button>
             <Button variant="ghost" size="sm">
               <Share2 className="mr-1 h-4 w-4" />

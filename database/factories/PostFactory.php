@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\PostType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,6 +22,7 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence(5),
             'content' => $this->faker->paragraphs(3, true),
             'user_id' => User::factory(),
+            'post_type' => PostType::ANNOUNCEMENT->value,
         ];
     }
 }

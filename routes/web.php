@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostCommentController;
+use App\Http\Controllers\PostLikeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -48,6 +50,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
         '/announcements/{announcement}',
         [AnnouncementController::class, 'destroy']
     )->name('announcements.destroy');
+
+    Route::post(
+        '/announcements/{announcement}/comments',
+        [PostCommentController::class, 'store']
+    )->name('announcements.comments.store');
+
+    Route::put(
+        '/announcements/{announcement}/comments/{comment}',
+        [PostCommentController::class, 'update']
+    )->name('announcements.comments.update');
+
+    Route::delete(
+        '/announcements/{announcement}/comments/{comment}',
+        [PostCommentController::class, 'destroy']
+    )->name('announcements.comments.destroy');
+
+    Route::post(
+        '/posts/{post}/like',
+        [PostLikeController::class, 'toggle']
+    )->name('posts.like.toggle');
 
     Route::get(
         '/categories',

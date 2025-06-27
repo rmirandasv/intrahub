@@ -53,6 +53,14 @@ class User extends Authenticatable
 
     public function posts(): HasMany
     {
-        return $this->hasMacro(Post::class);
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Get the likes that belong to the user.
+     */
+    public function likes(): HasMany
+    {
+        return $this->hasMany(PostLike::class);
     }
 }
