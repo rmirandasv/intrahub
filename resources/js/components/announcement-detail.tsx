@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { LikeButton } from '@/components/ui/like-button';
+import { ImageGallery } from '@/components/ui/image-gallery';
 import { useAppearance } from '@/hooks/use-appearance';
 import { useInitials } from '@/hooks/use-initials';
 import { Announcement, PostComment } from '@/types';
@@ -110,6 +111,13 @@ export function AnnouncementDetail({
         <CardContent className="pb-3">
           <div className="space-y-3">
             <h1 className="text-2xl font-semibold">{announcement.title}</h1>
+            {announcement.images && announcement.images.length > 0 && (
+              <ImageGallery 
+                images={announcement.images} 
+                maxHeight="h-80" 
+                className="mt-4"
+              />
+            )}
             <div className="rounded-md bg-[var(--bn-colors-editor-background)] py-4">
               <BlockNoteView editor={editor} editable={false} theme={appearance === 'system' ? 'light' : appearance} data-theming />
             </div>
