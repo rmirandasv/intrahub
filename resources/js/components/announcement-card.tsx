@@ -14,6 +14,7 @@ import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
 import { format, formatDistanceToNow } from 'date-fns';
 import { Clock, Edit, EllipsisVertical, MessageCircle, Share2, Trash } from 'lucide-react';
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
+import '@blocknote/mantine/style.css';
 
 interface AnnouncementCardProps {
   announcement: Announcement;

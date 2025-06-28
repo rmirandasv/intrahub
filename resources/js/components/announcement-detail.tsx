@@ -15,6 +15,7 @@ import { format, formatDistanceToNow } from 'date-fns';
 import { Clock, Edit, EllipsisVertical, MessageCircle, Share2, Trash } from 'lucide-react';
 import { CommentForm } from './comment-form';
 import { CommentsList } from './comments-list';
+import '@blocknote/mantine/style.css';
 
 interface AnnouncementDetailProps {
   announcement: Announcement;
