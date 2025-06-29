@@ -105,3 +105,14 @@ export type Category = {
   updated_at: string;
   post_count?: number;
 };
+
+export type Benefit = Post & {
+  id: number;
+  partner_name: string;
+  website: string | null;
+  email: string | null;
+  phone: string | null;
+  address: string | null;
+  post_id: number;
+  post: Post;
+};
