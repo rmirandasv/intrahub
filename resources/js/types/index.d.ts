@@ -106,7 +106,7 @@ export type Category = {
   post_count?: number;
 };
 
-export type Benefit = Post & {
+export type Benefit = {
   id: number;
   partner_name: string;
   website: string | null;

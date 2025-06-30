@@ -12,7 +12,7 @@ class BenefitController extends Controller
 {
     public function index()
     {
-        $benefits = Benefit::with('post')->get();
+        $benefits = Benefit::with('post', 'post.category')->paginate(10);
         return Inertia::render(component: 'benefits/index', props: [
             'benefits' => $benefits,
         ]);
