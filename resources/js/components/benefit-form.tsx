@@ -129,7 +129,7 @@ export default function BenefitForm({ initialData, onSubmit, loading = false, ca
                     <FormLabel>Images</FormLabel>
                     <FormControl>
                       <ImageUpload
-                        value={field.value}
+                        value={field.value || []}
                         onChange={field.onChange}
                         maxFiles={5}
                         maxSize={5 * 1024 * 1024} // 5MB
@@ -137,7 +137,7 @@ export default function BenefitForm({ initialData, onSubmit, loading = false, ca
                       />
                     </FormControl>
                     <FormDescription>
-                      Upload up to 5 images (JPEG, PNG, GIF, WebP) up to 5MB each.
+                      Upload up to 5 images (JPEG, PNG, GIF, WebP) up to 5MB each. Optional for editing.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

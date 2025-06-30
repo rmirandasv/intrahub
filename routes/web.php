@@ -116,6 +116,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         '/benefits',
         [BenefitController::class, 'store']
     )->name('benefits.store');
+
+    Route::get(
+        '/benefits/{benefit}/edit',
+        [BenefitController::class, 'edit']
+    )->name('benefits.edit');
+
+    Route::put(
+        '/benefits/{benefit}',
+        [BenefitController::class, 'update']
+    )->name('benefits.update');
 });
 
 require __DIR__.'/settings.php';

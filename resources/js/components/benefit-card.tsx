@@ -1,8 +1,10 @@
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Benefit } from '@/types';
 import { Link } from '@inertiajs/react';
-import { Calendar, MapPin, Globe } from 'lucide-react';
+import { Calendar, MapPin, Globe, Edit, EllipsisVertical, Trash } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 interface BenefitCardProps {
   benefit: Benefit;
@@ -10,6 +12,12 @@ interface BenefitCardProps {
 }
 
 export function BenefitCard({ benefit, onDelete }: BenefitCardProps) {
+  const handleDelete = () => {
+    if (onDelete) {
+      onDelete(benefit);
+    }
+  };
+
   return (
     <Card className="w-full">
       <CardHeader className="pb-3">
@@ -26,6 +34,25 @@ export function BenefitCard({ benefit, onDelete }: BenefitCardProps) {
             <CardTitle className="text-lg font-semibold mt-1">{benefit.post.title}</CardTitle>
             <CardDescription className="text-sm">{benefit.partner_name}</CardDescription>
           </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <EllipsisVertical className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem asChild>
+                <Link href={route('benefits.edit', benefit.id)} className="flex items-center gap-2">
+                  <Edit className="h-4 w-4" />
+                  Edit
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleDelete}>
+                <Trash className="h-4 w-4" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </CardHeader>
       <CardContent className="pb-3">

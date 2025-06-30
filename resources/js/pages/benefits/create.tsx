@@ -11,6 +11,7 @@ export default function BenefitCreate({ categories }: { categories: Category[] }
 
   const onSubmit = (data: BenefitFormValues) => {
     setLoading(true);
+    
     router.post('/benefits', data, {
       onFinish: () => setLoading(false),
       forceFormData: true,
