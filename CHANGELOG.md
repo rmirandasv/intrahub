@@ -1,3 +1,23 @@
+# [0.4.0](https://github.com/rmirandasv/intrahub/compare/v0.3.0...v0.4.0) (2025-07-01)
+
+
+### Bug Fixes
+
+* import Mantine styles in announcement card and detail components ([0891c84](https://github.com/rmirandasv/intrahub/commit/0891c844add5aeae82561017f45aa5301d36011d))
+* update image handling in announcement actions ([013c435](https://github.com/rmirandasv/intrahub/commit/013c435c08fa77a0e707ad15c81280490a1fc80e))
+
+
+### Features
+
+* add image gallery component and integrate with announcement display ([1f441f9](https://github.com/rmirandasv/intrahub/commit/1f441f9638c2c69edb5bec70c6c771ebfb20948a))
+* add image upload functionality to announcements ([336a1df](https://github.com/rmirandasv/intrahub/commit/336a1dfb283fe91b8de39d7efd5cfc78db015200))
+* benefit creation functionality ([5d7b14f](https://github.com/rmirandasv/intrahub/commit/5d7b14f7799d844109ae1f62b6eced6323d655cb))
+* benefit deletion functionality with modal confirmation ([9fbc977](https://github.com/rmirandasv/intrahub/commit/9fbc977ff1996742db539babf2a596955a484c8e))
+* benefit update functionality ([3df0887](https://github.com/rmirandasv/intrahub/commit/3df0887d1e37bda67190896bdb3135be78ee4c8d))
+* benefits index patge and new benefit-card component ([d8070d9](https://github.com/rmirandasv/intrahub/commit/d8070d97da4a0131c690fe0240a97fd1b04e1f5b))
+* integrate backend media library for announcements ([64a316e](https://github.com/rmirandasv/intrahub/commit/64a316e5e23a659f18aac4f356df44253d5081d2))
+* show functionality for benefits ([34abd99](https://github.com/rmirandasv/intrahub/commit/34abd99e6a6e111d93e2ad4930aaca8858c536e2))
+
 # [0.3.0](https://github.com/rmirandasv/intrahub/compare/v0.2.0...v0.3.0) (2025-06-27)
 
 
