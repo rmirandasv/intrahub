@@ -11,11 +11,11 @@ class CreateAnnouncement
     /**
      * Create a new announcement for the given user.
      *
-     * @param  array  $data{  title: string, content: string, expiration_date: string, is_featured: boolean, category_id: string | null }
+     * @param  array  $data{  title: string, content: string, expiration_date: string, is_featured: boolean, category_id: string | null, images: array | null }
      */
     public function handle(User $user, array $data): Post
     {
-        return Post::create([
+        $post = Post::create([
             'title' => $data['title'],
             'content' => $data['content'],
             'post_type' => PostType::ANNOUNCEMENT,
@@ -24,5 +24,17 @@ class CreateAnnouncement
             'is_featured' => $data['is_featured'] ?? false,
             'category_id' => $data['category_id'] ?? null,
         ]);
+
+        if (isset($data['images'])) {
+            if (is_array($data['images'])) {
+                foreach ($data['images'] as $image) {
+                    $post->addMedia($image)->toMediaCollection('announcements');
+                }
+            } else {
+                $post->addMedia($data['images'])->toMediaCollection('announcements');
+            }
+        }
+
+        return $post;
     }
 }

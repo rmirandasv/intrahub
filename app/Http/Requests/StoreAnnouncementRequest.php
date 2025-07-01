@@ -28,6 +28,7 @@ class StoreAnnouncementRequest extends FormRequest
             'expiration_date' => ['nullable', 'date'],
             'is_featured' => ['nullable', 'boolean'],
             'category_id' => ['nullable', 'exists:categories,id'],
+            'images' => ['nullable', 'array'],
         ];
     }
 }

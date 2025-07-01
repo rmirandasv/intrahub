@@ -5,15 +5,18 @@ namespace App\Models;
 use App\Enums\PostType;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'title',
@@ -24,6 +27,14 @@ class Post extends Model
         'expiration_date',
         'is_featured',
         'category_id',
+    ];
+
+    protected $appends = [
+        'images',
+    ];
+
+    protected $hidden = [
+        'media',
     ];
 
     protected function casts(): array
@@ -67,6 +78,13 @@ class Post extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(PostComment::class);
+    }
+
+    public function images(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->getMedia('*')->map(fn ($media) => $media->getUrl()),
+        );
     }
 
     #[Scope]

@@ -23,19 +23,24 @@ const schema = z.object({
   is_featured: z.boolean(),
   category_id: z.string(),
   images: z.array(z.instanceof(File)).optional(),
+  partner_name: z.string().min(1).max(100),
+  website: z.string().url().optional().or(z.literal('')),
+  email: z.string().email().optional().or(z.literal('')),
+  phone: z.string().optional().or(z.literal('')),
+  address: z.string().optional().or(z.literal('')),
 });
 
-export type AnnouncementFormValues = z.infer<typeof schema>;
+export type BenefitFormValues = z.infer<typeof schema>;
 
-interface AnnouncementFormProps {
-  initialData?: Partial<AnnouncementFormValues>;
-  onSubmit: (data: AnnouncementFormValues) => void;
+interface BenefitFormProps {
+  initialData?: Partial<BenefitFormValues>;
+  onSubmit: (data: BenefitFormValues) => void;
   loading?: boolean;
   categories: Category[];
 }
 
-export default function AnnouncementForm({ initialData, onSubmit, loading = false, categories }: AnnouncementFormProps) {
-  const form = useForm<AnnouncementFormValues>({
+export default function BenefitForm({ initialData, onSubmit, loading = false, categories }: BenefitFormProps) {
+  const form = useForm<BenefitFormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       title: initialData?.title ?? '',
@@ -44,10 +49,15 @@ export default function AnnouncementForm({ initialData, onSubmit, loading = fals
       is_featured: initialData?.is_featured ?? false,
       category_id: initialData?.category_id ?? '',
       images: initialData?.images ?? [],
+      partner_name: initialData?.partner_name ?? '',
+      website: initialData?.website ?? '',
+      email: initialData?.email ?? '',
+      phone: initialData?.phone ?? '',
+      address: initialData?.address ?? '',
     },
   });
 
-  const handleSubmit = (data: AnnouncementFormValues) => {
+  const handleSubmit = (data: BenefitFormValues) => {
     onSubmit(data);
   };
 
@@ -57,8 +67,8 @@ export default function AnnouncementForm({ initialData, onSubmit, loading = fals
         <div className="grid auto-rows-max items-start gap-4 lg:col-span-2 lg:gap-8">
           <Card>
             <CardHeader>
-              <CardTitle>Announcement Details</CardTitle>
-              <CardDescription>Fill in the title and content for your announcement.</CardDescription>
+              <CardTitle>Benefit Details</CardTitle>
+              <CardDescription>Fill in the title and content for your benefit.</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
               <FormField
@@ -119,14 +129,92 @@ export default function AnnouncementForm({ initialData, onSubmit, loading = fals
                     <FormLabel>Images</FormLabel>
                     <FormControl>
                       <ImageUpload
-                        value={field.value}
+                        value={field.value || []}
                         onChange={field.onChange}
                         maxFiles={5}
                         maxSize={5 * 1024 * 1024} // 5MB
                         disabled={loading}
                       />
                     </FormControl>
-                    <FormDescription>Upload up to 5 images (JPEG, PNG, GIF, WebP) up to 5MB each.</FormDescription>
+                    <FormDescription>Upload up to 5 images (JPEG, PNG, GIF, WebP) up to 5MB each. Optional for editing.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Partner Information</CardTitle>
+              <CardDescription>Provide details about the partner offering this benefit.</CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-6">
+              <FormField
+                control={form.control}
+                name="partner_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Partner Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Partner or company name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="website"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Website</FormLabel>
+                    <FormControl>
+                      <Input placeholder="https://example.com" {...field} />
+                    </FormControl>
+                    <FormDescription>The partner's website URL (optional).</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="contact@example.com" type="email" {...field} />
+                    </FormControl>
+                    <FormDescription>Contact email for this benefit (optional).</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone</FormLabel>
+                    <FormControl>
+                      <Input placeholder="+1 (555) 123-4567" {...field} />
+                    </FormControl>
+                    <FormDescription>Contact phone number for this benefit (optional).</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Address</FormLabel>
+                    <FormControl>
+                      <Input placeholder="123 Main St, City, State 12345" {...field} />
+                    </FormControl>
+                    <FormDescription>Physical address for this benefit (optional).</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -175,7 +263,7 @@ export default function AnnouncementForm({ initialData, onSubmit, loading = fals
                   <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                     <div className="space-y-0.5">
                       <FormLabel className="text-base">Is Featured</FormLabel>
-                      <FormDescription>Featured announcements will be displayed prominently.</FormDescription>
+                      <FormDescription>Featured benefits will be displayed prominently.</FormDescription>
                     </div>
                     <FormControl>
                       <Switch checked={field.value} onCheckedChange={field.onChange} />

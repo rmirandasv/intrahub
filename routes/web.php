@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostLikeController;
@@ -100,6 +101,41 @@ Route::middleware(['auth', 'verified'])->group(function () {
         '/categories/{category}',
         [CategoryController::class, 'destroy']
     )->name('categories.destroy');
+
+    Route::get(
+        '/benefits',
+        [BenefitController::class, 'index']
+    )->name('benefits.index');
+
+    Route::get(
+        '/benefits/create',
+        [BenefitController::class, 'create']
+    )->name('benefits.create');
+
+    Route::get(
+        '/benefits/{benefit}',
+        [BenefitController::class, 'show']
+    )->name('benefits.show');
+
+    Route::post(
+        '/benefits',
+        [BenefitController::class, 'store']
+    )->name('benefits.store');
+
+    Route::get(
+        '/benefits/{benefit}/edit',
+        [BenefitController::class, 'edit']
+    )->name('benefits.edit');
+
+    Route::put(
+        '/benefits/{benefit}',
+        [BenefitController::class, 'update']
+    )->name('benefits.update');
+
+    Route::delete(
+        '/benefits/{benefit}',
+        [BenefitController::class, 'destroy']
+    )->name('benefits.destroy');
 });
 
 require __DIR__.'/settings.php';

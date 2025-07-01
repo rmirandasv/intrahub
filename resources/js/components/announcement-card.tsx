@@ -2,11 +2,13 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { ImageGallery } from '@/components/ui/image-gallery';
 import { LikeButton } from '@/components/ui/like-button';
 import { useAppearance } from '@/hooks/use-appearance';
 import { useInitials } from '@/hooks/use-initials';
 import { Announcement } from '@/types';
 import { BlockNoteView } from '@blocknote/mantine';
+import '@blocknote/mantine/style.css';
 import { useCreateBlockNote } from '@blocknote/react';
 import { Link } from '@inertiajs/react';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
@@ -62,6 +64,7 @@ export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardPro
       <CardContent className="pb-3">
         <div className="space-y-3">
           <h3 className="text-xl font-semibold">{announcement.title}</h3>
+          {announcement.images && announcement.images.length > 0 && <ImageGallery images={announcement.images} maxHeight="h-48" className="mt-3" />}
           <div className="rounded-md bg-[var(--bn-colors-editor-background)] py-4">
             <BlockNoteView editor={editor} editable={false} theme={appearance === 'system' ? 'light' : appearance} data-theming />
           </div>

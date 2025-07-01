@@ -92,6 +92,7 @@ export type Post = {
   is_liked: boolean;
   comments: PostComment[];
   comments_count: number;
+  images: string[];
 };
 
 export type Announcement = Post;
@@ -103,4 +104,15 @@ export type Category = {
   created_at: string;
   updated_at: string;
   post_count?: number;
+};
+
+export type Benefit = {
+  id: number;
+  partner_name: string;
+  website: string | null;
+  email: string | null;
+  phone: string | null;
+  address: string | null;
+  post_id: number;
+  post: Post;
 };
