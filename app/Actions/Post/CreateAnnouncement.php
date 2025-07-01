@@ -25,7 +25,7 @@ class CreateAnnouncement
             'category_id' => $data['category_id'] ?? null,
         ]);
 
-        if ($data['images']) {
+        if (isset($data['images'])) {
             if (is_array($data['images'])) {
                 foreach ($data['images'] as $image) {
                     $post->addMedia($image)->toMediaCollection('announcements');

@@ -21,7 +21,7 @@ class UpdateAnnouncement
             'category_id' => $data['category_id'] ?? null,
         ]);
 
-        if ($data['images']) {
+        if (isset($data['images'])) {
             $post->clearMediaCollection('announcements');
             $post->addMediaFromUrl($data['images'])->toMediaCollection('announcements');
         }
