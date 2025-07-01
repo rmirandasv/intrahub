@@ -3,19 +3,19 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { LikeButton } from '@/components/ui/like-button';
 import { ImageGallery } from '@/components/ui/image-gallery';
+import { LikeButton } from '@/components/ui/like-button';
 import { useAppearance } from '@/hooks/use-appearance';
 import { useInitials } from '@/hooks/use-initials';
 import { Benefit, PostComment } from '@/types';
 import { BlockNoteView } from '@blocknote/mantine';
+import '@blocknote/mantine/style.css';
 import { useCreateBlockNote } from '@blocknote/react';
 import { Link } from '@inertiajs/react';
 import { format, formatDistanceToNow } from 'date-fns';
-import { Clock, Edit, EllipsisVertical, MessageCircle, Share2, Trash, MapPin, Globe, Mail, Phone, Calendar } from 'lucide-react';
+import { Calendar, Clock, Edit, EllipsisVertical, Globe, Mail, MapPin, MessageCircle, Phone, Share2, Trash } from 'lucide-react';
 import { CommentForm } from './comment-form';
 import { CommentsList } from './comments-list';
-import '@blocknote/mantine/style.css';
 
 interface BenefitDetailProps {
   benefit: Benefit;
@@ -113,11 +113,11 @@ export function BenefitDetail({
           <div className="space-y-4">
             <div>
               <h1 className="text-2xl font-semibold">{benefit.post.title}</h1>
-              <p className="text-lg text-muted-foreground mt-1">Partner: {benefit.partner_name}</p>
+              <p className="mt-1 text-lg text-muted-foreground">Partner: {benefit.partner_name}</p>
             </div>
 
             {/* Benefit Details */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-muted/50 rounded-lg">
+            <div className="grid grid-cols-1 gap-4 rounded-lg bg-muted/50 p-4 md:grid-cols-2">
               {benefit.address && (
                 <div className="flex items-center gap-2 text-sm">
                   <MapPin className="h-4 w-4 text-muted-foreground" />
@@ -157,13 +157,7 @@ export function BenefitDetail({
             </div>
 
             {/* Images */}
-            {benefit.post.images && benefit.post.images.length > 0 && (
-              <ImageGallery 
-                images={benefit.post.images} 
-                maxHeight="h-80" 
-                className="mt-4"
-              />
-            )}
+            {benefit.post.images && benefit.post.images.length > 0 && <ImageGallery images={benefit.post.images} maxHeight="h-80" className="mt-4" />}
 
             {/* Content */}
             <div className="rounded-md bg-[var(--bn-colors-editor-background)] py-4">
@@ -212,4 +206,4 @@ export function BenefitDetail({
       </div>
     </div>
   );
-} 
+}

@@ -13,18 +13,18 @@ class CreateBenefit
      * Create a new benefit for the given post.
      *
      * @param  array  $data{
-     *  title: string,
-     *  content: string,
-     *  expiration_date: string,
-     *  is_featured: boolean,
-     *  category_id: string | null,
-     *  images: array | null,
-     *  partner_name: string,
-     *  website: string | null,
-     *  email: string | null,
-     *  phone: string | null,
-     *  address: string | null,
-     * }
+     *                        title: string,
+     *                        content: string,
+     *                        expiration_date: string,
+     *                        is_featured: boolean,
+     *                        category_id: string | null,
+     *                        images: array | null,
+     *                        partner_name: string,
+     *                        website: string | null,
+     *                        email: string | null,
+     *                        phone: string | null,
+     *                        address: string | null,
+     *                        }
      */
     public function handle(User $user, array $data): Benefit
     {

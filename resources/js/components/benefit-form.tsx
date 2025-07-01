@@ -13,8 +13,8 @@ import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import ImageUpload from './ui/image-upload';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 const schema = z.object({
   title: z.string().min(1).max(100),
@@ -136,9 +136,7 @@ export default function BenefitForm({ initialData, onSubmit, loading = false, ca
                         disabled={loading}
                       />
                     </FormControl>
-                    <FormDescription>
-                      Upload up to 5 images (JPEG, PNG, GIF, WebP) up to 5MB each. Optional for editing.
-                    </FormDescription>
+                    <FormDescription>Upload up to 5 images (JPEG, PNG, GIF, WebP) up to 5MB each. Optional for editing.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -174,9 +172,7 @@ export default function BenefitForm({ initialData, onSubmit, loading = false, ca
                     <FormControl>
                       <Input placeholder="https://example.com" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      The partner's website URL (optional).
-                    </FormDescription>
+                    <FormDescription>The partner's website URL (optional).</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -190,9 +186,7 @@ export default function BenefitForm({ initialData, onSubmit, loading = false, ca
                     <FormControl>
                       <Input placeholder="contact@example.com" type="email" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      Contact email for this benefit (optional).
-                    </FormDescription>
+                    <FormDescription>Contact email for this benefit (optional).</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -206,9 +200,7 @@ export default function BenefitForm({ initialData, onSubmit, loading = false, ca
                     <FormControl>
                       <Input placeholder="+1 (555) 123-4567" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      Contact phone number for this benefit (optional).
-                    </FormDescription>
+                    <FormDescription>Contact phone number for this benefit (optional).</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -222,9 +214,7 @@ export default function BenefitForm({ initialData, onSubmit, loading = false, ca
                     <FormControl>
                       <Input placeholder="123 Main St, City, State 12345" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      Physical address for this benefit (optional).
-                    </FormDescription>
+                    <FormDescription>Physical address for this benefit (optional).</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -292,4 +282,4 @@ export default function BenefitForm({ initialData, onSubmit, loading = false, ca
       </form>
     </Form>
   );
-} 
+}

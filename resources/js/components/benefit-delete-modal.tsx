@@ -43,4 +43,4 @@ export function BenefitDeleteModal({ benefit, isOpen, onClose }: BenefitDeleteMo
       </DialogContent>
     </Dialog>
   );
-} 
+}

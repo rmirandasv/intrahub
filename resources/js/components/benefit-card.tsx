@@ -1,9 +1,9 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Benefit } from '@/types';
 import { Link } from '@inertiajs/react';
-import { Calendar, MapPin, Globe, Edit, EllipsisVertical, Trash } from 'lucide-react';
+import { Calendar, Edit, EllipsisVertical, Globe, MapPin, Trash } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 interface BenefitCardProps {
@@ -24,14 +24,14 @@ export function BenefitCard({ benefit, onDelete }: BenefitCardProps) {
         <div className="flex items-start justify-between">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
-              {benefit.post.category && (
-                <Badge variant="outline">{benefit.post.category.name}</Badge>
-              )}
+              {benefit.post.category && <Badge variant="outline">{benefit.post.category.name}</Badge>}
               {benefit.post.is_featured && (
-                <Badge variant="secondary" className="text-xs">Featured</Badge>
+                <Badge variant="secondary" className="text-xs">
+                  Featured
+                </Badge>
               )}
             </div>
-            <CardTitle className="text-lg font-semibold mt-1">{benefit.post.title}</CardTitle>
+            <CardTitle className="mt-1 text-lg font-semibold">{benefit.post.title}</CardTitle>
             <CardDescription className="text-sm">{benefit.partner_name}</CardDescription>
           </div>
           <DropdownMenu>
@@ -79,11 +79,14 @@ export function BenefitCard({ benefit, onDelete }: BenefitCardProps) {
           )}
         </div>
       </CardContent>
-      <CardFooter className="pt-0 flex justify-end">
-        <Link href={`/benefits/${benefit.id}`} className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
+      <CardFooter className="flex justify-end pt-0">
+        <Link
+          href={`/benefits/${benefit.id}`}
+          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+        >
           Learn More
         </Link>
       </CardFooter>
     </Card>
   );
-} 
+}

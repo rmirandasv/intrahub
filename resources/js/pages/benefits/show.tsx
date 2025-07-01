@@ -51,4 +51,4 @@ export default function BenefitShow({ benefit }: { benefit: Benefit }) {
       </Container>
     </AppLayout>
   );
-} 
+}

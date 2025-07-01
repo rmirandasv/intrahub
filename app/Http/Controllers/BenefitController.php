@@ -17,8 +17,9 @@ class BenefitController extends Controller
     public function index()
     {
         Gate::authorize('viewAny', Benefit::class);
-        
+
         $benefits = Benefit::with('post', 'post.category')->paginate(10);
+
         return Inertia::render(component: 'benefits/index', props: [
             'benefits' => $benefits,
         ]);
@@ -62,7 +63,7 @@ class BenefitController extends Controller
         $benefit->load('post', 'post.category');
 
         $categories = Category::all();
-        
+
         return Inertia::render(component: 'benefits/edit', props: [
             'benefit' => $benefit,
             'categories' => $categories,

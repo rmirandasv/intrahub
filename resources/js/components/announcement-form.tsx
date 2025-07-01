@@ -13,8 +13,8 @@ import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import ImageUpload from './ui/image-upload';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 const schema = z.object({
   title: z.string().min(1).max(100),
@@ -126,9 +126,7 @@ export default function AnnouncementForm({ initialData, onSubmit, loading = fals
                         disabled={loading}
                       />
                     </FormControl>
-                    <FormDescription>
-                      Upload up to 5 images (JPEG, PNG, GIF, WebP) up to 5MB each.
-                    </FormDescription>
+                    <FormDescription>Upload up to 5 images (JPEG, PNG, GIF, WebP) up to 5MB each.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

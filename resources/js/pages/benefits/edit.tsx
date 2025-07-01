@@ -6,18 +6,12 @@ import { Benefit, Category } from '@/types';
 import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function BenefitEdit({ 
-  benefit, 
-  categories 
-}: { 
-  benefit: Benefit; 
-  categories: Category[] 
-}) {
+export default function BenefitEdit({ benefit, categories }: { benefit: Benefit; categories: Category[] }) {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (data: BenefitFormValues) => {
     setLoading(true);
-    
+
     router.put(`/benefits/${benefit.id}`, data, {
       onFinish: () => setLoading(false),
       onError: (errors) => {
@@ -50,13 +44,8 @@ export default function BenefitEdit({
     >
       <Container>
         <Heading title="Edit benefit" />
-        <BenefitForm 
-          onSubmit={onSubmit} 
-          loading={loading} 
-          categories={categories}
-          initialData={initialData}
-        />
+        <BenefitForm onSubmit={onSubmit} loading={loading} categories={categories} initialData={initialData} />
       </Container>
     </AppLayout>
   );
-} 
+}

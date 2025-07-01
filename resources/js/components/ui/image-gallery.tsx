@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
-import { Dialog, DialogContent, DialogTrigger } from './dialog';
+import { Dialog, DialogContent } from './dialog';
 import { Button } from './button';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 

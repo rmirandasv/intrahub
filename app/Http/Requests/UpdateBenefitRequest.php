@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Benefit;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateBenefitRequest extends FormRequest

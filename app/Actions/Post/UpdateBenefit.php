@@ -2,30 +2,27 @@
 
 namespace App\Actions\Post;
 
-use App\Enums\PostType;
 use App\Models\Benefit;
 use App\Models\Post;
-use App\Models\User;
 
 class UpdateBenefit
 {
     /**
      * Update an existing benefit for the given post.
      *
-     * @param  Benefit  $benefit
      * @param  array  $data{
-     *  title: string,
-     *  content: string,
-     *  expiration_date: string,
-     *  is_featured: boolean,
-     *  category_id: string | null,
-     *  images: array | null,
-     *  partner_name: string,
-     *  website: string | null,
-     *  email: string | null,
-     *  phone: string | null,
-     *  address: string | null,
-     * }
+     *                        title: string,
+     *                        content: string,
+     *                        expiration_date: string,
+     *                        is_featured: boolean,
+     *                        category_id: string | null,
+     *                        images: array | null,
+     *                        partner_name: string,
+     *                        website: string | null,
+     *                        email: string | null,
+     *                        phone: string | null,
+     *                        address: string | null,
+     *                        }
      */
     public function handle(Benefit $benefit, array $data): void
     {
@@ -47,7 +44,7 @@ class UpdateBenefit
 
         if (isset($data['images'])) {
             $benefit->post->clearMediaCollection('benefits');
-            
+
             if (is_array($data['images'])) {
                 foreach ($data['images'] as $image) {
                     $benefit->post->addMedia($image)->toMediaCollection('benefits');
