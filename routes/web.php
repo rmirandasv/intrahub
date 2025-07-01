@@ -112,6 +112,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         [BenefitController::class, 'create']
     )->name('benefits.create');
 
+    Route::get(
+        '/benefits/{benefit}',
+        [BenefitController::class, 'show']
+    )->name('benefits.show');
+
     Route::post(
         '/benefits',
         [BenefitController::class, 'store']

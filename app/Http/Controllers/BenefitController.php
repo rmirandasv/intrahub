@@ -35,6 +35,17 @@ class BenefitController extends Controller
         ]);
     }
 
+    public function show(Benefit $benefit)
+    {
+        Gate::authorize('view', $benefit);
+
+        $benefit->load('post', 'post.category', 'post.user', 'post.comments.user');
+
+        return Inertia::render(component: 'benefits/show', props: [
+            'benefit' => $benefit,
+        ]);
+    }
+
     public function store(StoreBenefitRequest $request, CreateBenefit $createBenefit)
     {
         Gate::authorize('create', Benefit::class);
