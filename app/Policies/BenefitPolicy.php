@@ -45,7 +45,7 @@ class BenefitPolicy
      */
     public function delete(User $user, Benefit $benefit): bool
     {
-        return false;
+        return $user->is_staff;
     }
 
     /**

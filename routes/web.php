@@ -126,6 +126,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         '/benefits/{benefit}',
         [BenefitController::class, 'update']
     )->name('benefits.update');
+
+    Route::delete(
+        '/benefits/{benefit}',
+        [BenefitController::class, 'destroy']
+    )->name('benefits.destroy');
 });
 
 require __DIR__.'/settings.php';
