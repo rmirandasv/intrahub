@@ -25,15 +25,13 @@ export function PostCard({ post, onDelete }: PostCardProps) {
     case 'announcement':
       return <AnnouncementCard announcement={post} onDelete={onDelete} />;
     case 'benefit':
-      const benefit = (post as any).benefit;
-      if (benefit) {
-        return <BenefitCard benefit={benefit} onDelete={handleBenefitDelete} />;
+      if (post.benefit) {
+        return <BenefitCard benefit={post.benefit} onDelete={handleBenefitDelete} />;
       }
       return <div>Benefit data not available</div>;
     case 'event':
-      const event = (post as any).event;
-      if (event) {
-        return <EventCard event={event} onDelete={handleEventDelete} />;
+      if (post.event) {
+        return <EventCard event={post.event} onDelete={handleEventDelete} />;
       }
       return <div>Event data not available</div>;
     default:

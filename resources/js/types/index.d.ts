@@ -94,6 +94,8 @@ export type Post = {
   comments: PostComment[];
   comments_count: number;
   images: string[];
+  benefit?: Benefit | null;
+  event?: Event | null;
 };
 
 export type Announcement = Post;

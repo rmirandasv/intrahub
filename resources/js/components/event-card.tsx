@@ -14,7 +14,7 @@ interface EventCardProps {
   isRSVPed?: boolean;
 }
 
-export function EventCard({ event, onDelete, isRSVPed }: EventCardProps) {
+export function EventCard({ event, onDelete }: EventCardProps) {
   const { post } = event;
   const handleDelete = () => {
     if (onDelete) {
@@ -34,16 +34,11 @@ export function EventCard({ event, onDelete, isRSVPed }: EventCardProps) {
   const capacity = event.capacity || 0;
   const attendancePercent = capacity > 0 ? Math.round((attending / capacity) * 100) : 0;
 
-  // Date formatting
   const eventDate = event.event_date ? new Date(event.event_date) : null;
   const eventDateStr = eventDate ? eventDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : '';
 
-  // Horario (no hay campo de hora en Event, así que solo fecha)
-
-  // Short description
   const shortContent = post.content.length > 80 ? post.content.slice(0, 77) + '...' : post.content;
 
-  // Primera imagen si existe
   const imageUrl = post.images && post.images.length > 0 ? post.images[0] : null;
 
   return (
@@ -100,7 +95,6 @@ export function EventCard({ event, onDelete, isRSVPed }: EventCardProps) {
               <span>{eventDateStr}</span>
             </div>
           )}
-          {/* Si hay horario, agregar aquí con <Clock /> */}
           {event.location && (
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <MapPin className="h-4 w-4" />
@@ -129,7 +123,6 @@ export function EventCard({ event, onDelete, isRSVPed }: EventCardProps) {
         )}
       </CardContent>
       <CardFooter className="flex flex-col gap-2 pt-0">
-        {/* RSVP/Cancel RSVP button, solo UI, hooks comentados */}
         {/*
         {isRSVPed ? (
           <Button variant="outline" className="w-full" onClick={handleCancelRSVP}>

@@ -2,9 +2,8 @@ import Heading from '@/components/heading';
 import { PostCard } from '@/components/post-card';
 import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
-import { Category, Paginated, Post, type BreadcrumbItem } from '@/types';
+import { Paginated, Post, type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
-import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -13,15 +12,7 @@ const breadcrumbs: BreadcrumbItem[] = [
   },
 ];
 
-export default function Dashboard({ categories, posts }: { categories: Category[]; posts: Paginated<Post> }) {
-  const [postToDelete, setPostToDelete] = useState<Post | null>(null);
-
-  const handleDelete = (post: Post) => {
-    setPostToDelete(post);
-    // TODO: Implement delete modal for posts
-    console.log('Delete post:', post.id);
-  };
-
+export default function Dashboard({ posts }: { posts: Paginated<Post> }) {
   // Group posts by type for better organization
   const announcements = posts.data.filter((post) => post.post_type === 'announcement');
   const benefits = posts.data.filter((post) => post.post_type === 'benefit');
@@ -41,7 +32,7 @@ export default function Dashboard({ categories, posts }: { categories: Category[
               <h2 className="mb-4 text-2xl font-bold">Recent Announcements</h2>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {announcements.map((post) => (
-                  <PostCard key={post.id} post={post} onDelete={handleDelete} />
+                  <PostCard key={post.id} post={post} />
                 ))}
               </div>
             </div>
@@ -53,7 +44,7 @@ export default function Dashboard({ categories, posts }: { categories: Category[
               <h2 className="mb-4 text-2xl font-bold">Upcoming Events</h2>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {events.map((post) => (
-                  <PostCard key={post.id} post={post} onDelete={handleDelete} />
+                  <PostCard key={post.id} post={post} />
                 ))}
               </div>
             </div>
@@ -65,7 +56,7 @@ export default function Dashboard({ categories, posts }: { categories: Category[
               <h2 className="mb-4 text-2xl font-bold">Available Benefits</h2>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {benefits.map((post) => (
-                  <PostCard key={post.id} post={post} onDelete={handleDelete} />
+                  <PostCard key={post.id} post={post} />
                 ))}
               </div>
             </div>
