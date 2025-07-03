@@ -88,6 +88,7 @@ export type Post = {
   updated_at: string;
   content: string;
   category?: Category | null;
+  category_id: number | null;
   likes_count: number;
   is_liked: boolean;
   comments: PostComment[];
@@ -115,4 +116,15 @@ export type Benefit = {
   address: string | null;
   post_id: number;
   post: Post;
+};
+
+export type Event = {
+  id: number;
+  post_id: number;
+  post: Post;
+  event_date: string;
+  location: string;
+  capacity: number | null;
+  created_at: string;
+  updated_at: string;
 };
