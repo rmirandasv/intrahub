@@ -9,7 +9,6 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Category;
 use App\Models\Event;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
@@ -42,6 +41,7 @@ class EventController extends Controller
         Gate::authorize('create', Event::class);
 
         $event = $createEvent->handle($request->user(), $request->validated());
+
         return redirect()->route('events.show', $event);
     }
 

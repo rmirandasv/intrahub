@@ -3,9 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Event } from '@/types';
 import { Link } from '@inertiajs/react';
-import { Calendar, Clock, Edit, EllipsisVertical, MapPin, Trash, Users } from 'lucide-react';
+import { Calendar, Edit, EllipsisVertical, MapPin, Trash, Users } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
-import * as React from 'react';
 
 interface EventCardProps {
   event: Event;
@@ -83,18 +82,18 @@ export function EventCard({ event, onDelete, isRSVPed }: EventCardProps) {
         </div>
       </CardHeader>
       {imageUrl ? (
-        <div className="h-36 w-full bg-muted flex items-center justify-center rounded-md overflow-hidden mb-2">
-          <img src={imageUrl} alt={post.title} className="object-cover w-full h-full" />
+        <div className="mb-2 flex h-36 w-full items-center justify-center overflow-hidden rounded-md bg-muted">
+          <img src={imageUrl} alt={post.title} className="h-full w-full object-cover" />
         </div>
       ) : (
-        <div className="h-36 w-full bg-muted flex items-center justify-center rounded-md overflow-hidden mb-2">
-          <span className="text-muted-foreground text-xs">No image</span>
+        <div className="mb-2 flex h-36 w-full items-center justify-center overflow-hidden rounded-md bg-muted">
+          <span className="text-xs text-muted-foreground">No image</span>
         </div>
       )}
       <CardContent className="pb-3">
-        <CardTitle className="text-lg font-semibold mb-1">{post.title}</CardTitle>
+        <CardTitle className="mb-1 text-lg font-semibold">{post.title}</CardTitle>
         <CardDescription className="mb-2 text-sm">{shortContent}</CardDescription>
-        <div className="space-y-1 mb-2">
+        <div className="mb-2 space-y-1">
           {eventDate && (
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Calendar className="h-4 w-4" />
@@ -111,21 +110,20 @@ export function EventCard({ event, onDelete, isRSVPed }: EventCardProps) {
           {capacity > 0 && (
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Users className="h-4 w-4" />
-              <span>{attending} / {capacity} attending</span>
+              <span>
+                {attending} / {capacity} attending
+              </span>
             </div>
           )}
         </div>
         {capacity > 0 && (
           <div className="mb-2">
-            <div className="flex justify-between text-xs mb-1">
+            <div className="mb-1 flex justify-between text-xs">
               <span>Attendance</span>
               <span>{attendancePercent}%</span>
             </div>
-            <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-              <div
-                className="h-2 bg-primary"
-                style={{ width: `${attendancePercent}%` }}
-              />
+            <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+              <div className="h-2 bg-primary" style={{ width: `${attendancePercent}%` }} />
             </div>
           </div>
         )}
@@ -149,4 +147,4 @@ export function EventCard({ event, onDelete, isRSVPed }: EventCardProps) {
       </CardFooter>
     </Card>
   );
-} 
+}

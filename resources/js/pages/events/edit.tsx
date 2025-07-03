@@ -1,20 +1,20 @@
-import EventForm, { EventFormValues } from "@/components/event-form";
+import EventForm, { EventFormValues } from '@/components/event-form';
 import Heading from '@/components/heading';
 import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
-import { Category, Event } from "@/types";
-import { router } from "@inertiajs/react";
-import { useState } from "react";
+import { Category, Event } from '@/types';
+import { router } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function EditEventPage({ event, categories }: { event: Event; categories: Category[] }) {
-    const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = (data: EventFormValues) => {
-        setIsLoading(true);
-        router.put(route('events.update', event.id), data, {
-            onFinish: () => setIsLoading(false),
-        });
-    }
+  const handleSubmit = (data: EventFormValues) => {
+    setIsLoading(true);
+    router.put(route('events.update', event.id), data, {
+      onFinish: () => setIsLoading(false),
+    });
+  };
   return (
     <AppLayout
       breadcrumbs={[
@@ -24,7 +24,10 @@ export default function EditEventPage({ event, categories }: { event: Event; cat
     >
       <Container>
         <Heading title="Edit event" description="Edit the event details" />
-        <EventForm categories={categories} loading={isLoading} initialData={{
+        <EventForm
+          categories={categories}
+          loading={isLoading}
+          initialData={{
             title: event.post.title,
             content: event.post.content,
             event_date: event.event_date ? new Date(event.event_date) : undefined,
@@ -33,7 +36,9 @@ export default function EditEventPage({ event, categories }: { event: Event; cat
             expiration_date: event.post.expiration_date ? new Date(event.post.expiration_date) : undefined,
             is_featured: event.post.is_featured,
             category_id: event.post.category_id?.toString(),
-        }} onSubmit={handleSubmit} />
+          }}
+          onSubmit={handleSubmit}
+        />
       </Container>
     </AppLayout>
   );

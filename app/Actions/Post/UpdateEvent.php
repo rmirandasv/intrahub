@@ -3,8 +3,6 @@
 namespace App\Actions\Post;
 
 use App\Models\Event;
-use App\Models\Post;
-use App\Models\User;
 
 class UpdateEvent
 {

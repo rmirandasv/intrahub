@@ -23,7 +23,7 @@ export default function EventIndex({ events }: { events: Paginated<Event> }) {
   };
 
   return (
-    <AppLayout breadcrumbs={[{ title: 'Events', href: '/events' }]}> 
+    <AppLayout breadcrumbs={[{ title: 'Events', href: '/events' }]}>
       <Container>
         <Heading title="Events" description="Company events">
           <Button asChild>

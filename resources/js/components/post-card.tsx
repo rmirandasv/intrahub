@@ -39,4 +39,4 @@ export function PostCard({ post, onDelete }: PostCardProps) {
     default:
       return <div>Unknown post type</div>;
   }
-} 
+}

@@ -194,10 +194,10 @@ export default function EventForm({ initialData, onSubmit, loading = false, cate
                   <FormItem>
                     <FormLabel>Capacity</FormLabel>
                     <FormControl>
-                      <Input 
-                        placeholder="Maximum number of attendees" 
-                        type="number" 
-                        {...field} 
+                      <Input
+                        placeholder="Maximum number of attendees"
+                        type="number"
+                        {...field}
                         onChange={(e) => {
                           const value = e.target.value;
                           field.onChange(value === '' ? null : parseInt(value, 10));
@@ -273,4 +273,4 @@ export default function EventForm({ initialData, onSubmit, loading = false, cate
       </form>
     </Form>
   );
-} 
+}

@@ -43,4 +43,4 @@ export function EventDeleteModal({ event, isOpen, onClose }: EventDeleteModalPro
       </DialogContent>
     </Dialog>
   );
-} 
+}
