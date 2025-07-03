@@ -54,12 +54,12 @@ class Post extends Model implements HasMedia
 
     public function benefit(): HasOne
     {
-        return $this->hasOne(Benefit::class);
+        return $this->hasOne(Benefit::class)->chaperone();
     }
 
     public function event(): HasOne
     {
-        return $this->hasOne(Event::class);
+        return $this->hasOne(Event::class)->chaperone();
     }
 
     public function category(): BelongsTo
