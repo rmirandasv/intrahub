@@ -3,6 +3,8 @@
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostLikeController;
 use Illuminate\Support\Facades\Route;
@@ -13,9 +15,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get(
         '/announcements',
@@ -136,6 +136,41 @@ Route::middleware(['auth', 'verified'])->group(function () {
         '/benefits/{benefit}',
         [BenefitController::class, 'destroy']
     )->name('benefits.destroy');
+
+    Route::get(
+        '/events',
+        [EventController::class, 'index']
+    )->name('events.index');
+
+    Route::get(
+        '/events/create',
+        [EventController::class, 'create']
+    )->name('events.create');
+
+    Route::get(
+        '/events/{event}',
+        [EventController::class, 'show']
+    )->name('events.show');
+
+    Route::get(
+        '/events/{event}/edit',
+        [EventController::class, 'edit']
+    )->name('events.edit');
+
+    Route::post(
+        '/events',
+        [EventController::class, 'store']
+    )->name('events.store');
+
+    Route::put(
+        '/events/{event}',
+        [EventController::class, 'update']
+    )->name('events.update');
+
+    Route::delete(
+        '/events/{event}',
+        [EventController::class, 'destroy']
+    )->name('events.destroy');
 });
 
 require __DIR__.'/settings.php';
