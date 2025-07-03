@@ -1,3 +1,11 @@
+# [0.5.0](https://github.com/rmirandasv/intrahub/compare/v0.4.0...v0.5.0) (2025-07-03)
+
+
+### Features
+
+* add DashboardController and PostCard component ([2aa7ac5](https://github.com/rmirandasv/intrahub/commit/2aa7ac52d5426a400b88442d312094611fbab581))
+* event management ([4ce4622](https://github.com/rmirandasv/intrahub/commit/4ce4622c64d62b10ccfde7f48ae207cd65f81ce7))
+
 # [0.4.0](https://github.com/rmirandasv/intrahub/compare/v0.3.0...v0.4.0) (2025-07-01)
 
 
