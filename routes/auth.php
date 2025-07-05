@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\InvitationController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -32,6 +33,21 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
+
+    // acept invitation
+    Route::get(
+        'accept-invitation/{token}',
+        [InvitationController::class, 'accept']
+    )
+        ->middleware('signed')
+        ->name('invitations.accept');
+
+    Route::post(
+        'accept-invitation/{token}',
+        [InvitationController::class, 'storeAccept']
+    )
+        ->middleware('signed')
+        ->name('invitations.storeAccept');
 });
 
 Route::middleware('auth')->group(function () {
