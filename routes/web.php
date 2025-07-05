@@ -5,8 +5,10 @@ use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -171,6 +173,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
         '/events/{event}',
         [EventController::class, 'destroy']
     )->name('events.destroy');
+
+    Route::get(
+        '/users',
+        [UserController::class, 'index']
+    )->name('users.index');
+
+    Route::get(
+        '/users/{user}',
+        [UserController::class, 'show']
+    )->name('users.show');
+
+    Route::post(
+        '/invitations',
+        [InvitationController::class, 'store']
+    )->name('invitations.store');
+
 });
 
 require __DIR__.'/settings.php';

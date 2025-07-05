@@ -51,6 +51,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function sentInvitations(): HasMany
+    {
+        return $this->hasMany(Invitation::class, 'invited_by');
+    }
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
