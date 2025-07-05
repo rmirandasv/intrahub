@@ -1,3 +1,12 @@
+# [0.6.0](https://github.com/rmirandasv/intrahub/compare/v0.5.0...v0.6.0) (2025-07-05)
+
+
+### Features
+
+* user deletion and role management features ([7dc3c4b](https://github.com/rmirandasv/intrahub/commit/7dc3c4b401ed1677e977d2629c06fb51fa3baad5))
+* user invitation system with email notifications and acceptance flow ([c96e092](https://github.com/rmirandasv/intrahub/commit/c96e0923ee39575e6f7607fca8ad19b230f78161))
+* user management components including UserCard, UserTable, and UserDeleteModal ([eb77c6b](https://github.com/rmirandasv/intrahub/commit/eb77c6b9e8665e2d45dac7da222945473cbd5fcb))
+
 # [0.5.0](https://github.com/rmirandasv/intrahub/compare/v0.4.0...v0.5.0) (2025-07-03)
 
 
