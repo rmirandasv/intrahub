@@ -31,37 +31,42 @@ export default function ChangeUserRoleModal({ user, isOpen, onOpenChange }: Chan
     },
   });
 
+  const { reset } = form;
+
   useEffect(() => {
-    form.reset({
+    reset({
       is_staff: user.is_staff,
     });
-  }, [user]);
+  }, [user, reset]);
 
-  const handleSubmit = useCallback(async (data: ChangeUserRoleFormValues) => {
-    setLoading(true);
+  const handleSubmit = useCallback(
+    async (data: ChangeUserRoleFormValues) => {
+      setLoading(true);
 
-    try {
-      await router.patch(`/users/${user.id}`, data, {
-        onSuccess: () => {
-          onOpenChange(false);
-        },
-        onError: (errors) => {
-          // Handle validation errors
-          Object.keys(errors).forEach((key) => {
-            form.setError(key as keyof ChangeUserRoleFormValues, {
-              type: 'server',
-              message: errors[key],
+      try {
+        await router.patch(`/users/${user.id}`, data, {
+          onSuccess: () => {
+            onOpenChange(false);
+          },
+          onError: (errors) => {
+            // Handle validation errors
+            Object.keys(errors).forEach((key) => {
+              form.setError(key as keyof ChangeUserRoleFormValues, {
+                type: 'server',
+                message: errors[key],
+              });
             });
-          });
-        },
-        onFinish: () => {
-          setLoading(false);
-        },
-      });
-    } catch (error) {
-      setLoading(false);
-    }
-  }, [form, user.id]);
+          },
+          onFinish: () => {
+            setLoading(false);
+          },
+        });
+      } catch {
+        setLoading(false);
+      }
+    },
+    [form, user.id, onOpenChange],
+  );
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>

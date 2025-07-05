@@ -185,7 +185,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     )->name('users.show');
 
     Route::delete(
-        '/users/{user}', 
+        '/users/{user}',
         [UserController::class, 'destroy']
     )->name('users.destroy');
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Actions\User\DeleteUser;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
@@ -17,7 +16,7 @@ class UserController extends Controller
         $users = User::paginate(10);
 
         return Inertia::render(component: 'users/index', props: [
-            'users' => $users
+            'users' => $users,
         ]);
     }
 

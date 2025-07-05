@@ -36,18 +36,18 @@ Route::middleware('guest')->group(function () {
 
     // acept invitation
     Route::get(
-        'accept-invitation/{token}', 
+        'accept-invitation/{token}',
         [InvitationController::class, 'accept']
     )
-    ->middleware('signed')
-    ->name('invitations.accept');
+        ->middleware('signed')
+        ->name('invitations.accept');
 
     Route::post(
-        'accept-invitation/{token}', 
+        'accept-invitation/{token}',
         [InvitationController::class, 'storeAccept']
     )
-    ->middleware('signed')
-    ->name('invitations.storeAccept');
+        ->middleware('signed')
+        ->name('invitations.storeAccept');
 });
 
 Route::middleware('auth')->group(function () {

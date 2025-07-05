@@ -8,9 +8,6 @@ class DeleteUser
 {
     /**
      * Delete a user
-     * 
-     * @param User $user
-     * @return void
      */
     public function handle(User $user): void
     {

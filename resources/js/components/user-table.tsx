@@ -5,7 +5,7 @@ import { User } from '@/types';
 import { Link } from '@inertiajs/react';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
 import { format, formatDistanceToNow } from 'date-fns';
-import { Edit, EllipsisVertical, Mail, Trash, User as UserIcon, Shield } from 'lucide-react';
+import { Edit, EllipsisVertical, Mail, Shield, Trash } from 'lucide-react';
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 interface UserTableProps {
@@ -58,9 +58,7 @@ export function UserTable({ users, onDelete, onRoleChange }: UserTableProps) {
                 <div className="flex items-center">
                   <Avatar className="mr-3 h-8 w-8">
                     <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback className="bg-primary/10 text-primary text-xs">
-                      {getInitials(user.name)}
-                    </AvatarFallback>
+                    <AvatarFallback className="bg-primary/10 text-xs text-primary">{getInitials(user.name)}</AvatarFallback>
                   </Avatar>
                   <div>
                     <div className="text-sm font-medium text-foreground">{user.name}</div>
@@ -132,4 +130,4 @@ export function UserTable({ users, onDelete, onRoleChange }: UserTableProps) {
       </table>
     </div>
   );
-} 
+}

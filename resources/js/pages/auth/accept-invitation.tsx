@@ -1,16 +1,14 @@
-import { Head, router, usePage } from '@inertiajs/react';
-import { LoaderCircle } from 'lucide-react';
-import { useState } from 'react';
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import AuthLayout from '@/layouts/auth-layout';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Head, router, usePage } from '@inertiajs/react';
+import { LoaderCircle } from 'lucide-react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import AuthLayout from '@/layouts/auth-layout';
-import { Invitation } from '@/types';
 
 const schema = z
   .object({
@@ -25,13 +23,8 @@ const schema = z
 
 type AcceptInvitationFormValues = z.infer<typeof schema>;
 
-interface AcceptInvitationProps {
-  invitation: Invitation;
-  errors?: Record<string, string>;
-}
-
-export default function AcceptInvitation({ invitation, errors }: AcceptInvitationProps) {
-    const { url } = usePage();
+export default function AcceptInvitation() {
+  const { url } = usePage();
   const [loading, setLoading] = useState(false);
 
   const form = useForm<AcceptInvitationFormValues>({
@@ -45,7 +38,7 @@ export default function AcceptInvitation({ invitation, errors }: AcceptInvitatio
 
   const handleSubmit = async (data: AcceptInvitationFormValues) => {
     setLoading(true);
-    
+
     try {
       await router.post(url, data, {
         onError: (errors) => {
@@ -61,24 +54,19 @@ export default function AcceptInvitation({ invitation, errors }: AcceptInvitatio
           setLoading(false);
         },
       });
-    } catch (error) {
+    } catch {
       setLoading(false);
     }
   };
 
   return (
-    <AuthLayout 
-      title="Accept Invitation" 
-      description="Complete your account setup to join the platform"
-    >
+    <AuthLayout title="Accept Invitation" description="Complete your account setup to join the platform">
       <Head title="Accept Invitation" />
 
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Welcome!</CardTitle>
-          <CardDescription>
-            You've been invited to join the platform. Please complete your account setup below.
-          </CardDescription>
+          <CardDescription>You've been invited to join the platform. Please complete your account setup below.</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -90,18 +78,13 @@ export default function AcceptInvitation({ invitation, errors }: AcceptInvitatio
                   <FormItem>
                     <FormLabel>Full Name</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Enter your full name"
-                        autoFocus
-                        disabled={loading}
-                        {...field}
-                      />
+                      <Input placeholder="Enter your full name" autoFocus disabled={loading} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="password"
@@ -109,18 +92,13 @@ export default function AcceptInvitation({ invitation, errors }: AcceptInvitatio
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Create a password"
-                        disabled={loading}
-                        {...field}
-                      />
+                      <Input type="password" placeholder="Create a password" disabled={loading} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="password_confirmation"
@@ -128,23 +106,14 @@ export default function AcceptInvitation({ invitation, errors }: AcceptInvitatio
                   <FormItem>
                     <FormLabel>Confirm Password</FormLabel>
                     <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Confirm your password"
-                        disabled={loading}
-                        {...field}
-                      />
+                      <Input type="password" placeholder="Confirm your password" disabled={loading} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              
-              <Button 
-                type="submit" 
-                className="w-full" 
-                disabled={loading}
-              >
+
+              <Button type="submit" className="w-full" disabled={loading}>
                 {loading && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
                 {loading ? 'Creating Account...' : 'Accept Invitation'}
               </Button>

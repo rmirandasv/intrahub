@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Models\Invitation;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -18,9 +17,7 @@ class InvitationMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public Invitation $invitation)
-    {
-    }
+    public function __construct(public Invitation $invitation) {}
 
     /**
      * Get the message envelope.
@@ -28,7 +25,7 @@ class InvitationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'You have been invited to join ' . config('app.name'),
+            subject: 'You have been invited to join '.config('app.name'),
             from: config('mail.from.address'),
         );
     }

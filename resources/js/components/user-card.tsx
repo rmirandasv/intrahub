@@ -3,10 +3,9 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { User } from '@/types';
-import { Link } from '@inertiajs/react';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
 import { format, formatDistanceToNow } from 'date-fns';
-import { Edit, EllipsisVertical, Mail, Shield, Trash, User as UserIcon } from 'lucide-react';
+import { EllipsisVertical, Mail, Shield, Trash, User as UserIcon } from 'lucide-react';
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 interface UserCardProps {

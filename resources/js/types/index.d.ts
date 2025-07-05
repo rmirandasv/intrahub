@@ -132,7 +132,7 @@ export type Event = {
   updated_at: string;
 };
 
-export type Invitation = { 
+export type Invitation = {
   id: number;
   email: string;
   token: string;

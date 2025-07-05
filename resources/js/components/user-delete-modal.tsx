@@ -1,12 +1,5 @@
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { User } from '@/types';
 import { router } from '@inertiajs/react';
 import { useState } from 'react';
@@ -24,7 +17,7 @@ export function UserDeleteModal({ user, isOpen, onClose }: UserDeleteModalProps)
     if (!user) return;
 
     setLoading(true);
-    
+
     try {
       await router.delete(`/users/${user.id}`, {
         onSuccess: () => {
@@ -34,7 +27,7 @@ export function UserDeleteModal({ user, isOpen, onClose }: UserDeleteModalProps)
           setLoading(false);
         },
       });
-    } catch (error) {
+    } catch {
       setLoading(false);
     }
   };
@@ -59,4 +52,4 @@ export function UserDeleteModal({ user, isOpen, onClose }: UserDeleteModalProps)
       </DialogContent>
     </Dialog>
   );
-} 
+}

@@ -1,13 +1,5 @@
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
@@ -42,7 +34,7 @@ export default function SendInvitationModal({ triggerText = 'Send Invitation' }:
 
   const handleSubmit = async (data: SendInvitationFormValues) => {
     setLoading(true);
-    
+
     try {
       await router.post('/invitations', data, {
         onSuccess: () => {
@@ -62,7 +54,7 @@ export default function SendInvitationModal({ triggerText = 'Send Invitation' }:
           setLoading(false);
         },
       });
-    } catch (error) {
+    } catch {
       setLoading(false);
     }
   };
@@ -95,12 +87,7 @@ export default function SendInvitationModal({ triggerText = 'Send Invitation' }:
                 <FormItem>
                   <FormLabel>Email Address</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Enter email address"
-                      type="email"
-                      disabled={loading}
-                      {...field}
-                    />
+                    <Input placeholder="Enter email address" type="email" disabled={loading} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -113,27 +100,16 @@ export default function SendInvitationModal({ triggerText = 'Send Invitation' }:
                 <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                   <div className="space-y-0.5">
                     <FormLabel className="text-base">Staff Privileges</FormLabel>
-                    <div className="text-sm text-muted-foreground">
-                      Grant staff privileges to this user
-                    </div>
+                    <div className="text-sm text-muted-foreground">Grant staff privileges to this user</div>
                   </div>
                   <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      disabled={loading}
-                    />
+                    <Switch checked={field.value} onCheckedChange={field.onChange} disabled={loading} />
                   </FormControl>
                 </FormItem>
               )}
             />
             <DialogFooter className="flex justify-end gap-2">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setOpen(false)}
-                disabled={loading}
-              >
+              <Button type="button" variant="outline" onClick={() => setOpen(false)} disabled={loading}>
                 Cancel
               </Button>
               <Button type="submit" disabled={loading}>
@@ -145,4 +121,4 @@ export default function SendInvitationModal({ triggerText = 'Send Invitation' }:
       </DialogContent>
     </Dialog>
   );
-} 
+}
