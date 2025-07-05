@@ -5,18 +5,25 @@ import { User } from '@/types';
 import { Link } from '@inertiajs/react';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
 import { format, formatDistanceToNow } from 'date-fns';
-import { Edit, EllipsisVertical, Mail, Trash, User as UserIcon } from 'lucide-react';
+import { Edit, EllipsisVertical, Mail, Trash, User as UserIcon, Shield } from 'lucide-react';
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 interface UserTableProps {
   users: User[];
   onDelete?: (user: User) => void;
+  onRoleChange?: (user: User) => void;
 }
 
-export function UserTable({ users, onDelete }: UserTableProps) {
+export function UserTable({ users, onDelete, onRoleChange }: UserTableProps) {
   const handleDelete = (user: User) => {
     if (onDelete) {
       onDelete(user);
+    }
+  };
+
+  const handleRoleChange = (user: User) => {
+    if (onRoleChange) {
+      onRoleChange(user);
     }
   };
 
@@ -107,6 +114,10 @@ export function UserTable({ users, onDelete }: UserTableProps) {
                         <Edit className="h-4 w-4" />
                         Edit
                       </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleRoleChange(user)} className="flex items-center gap-2">
+                      <Shield className="h-4 w-4" />
+                      Change Role
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => handleDelete(user)} className="text-red-600">
                       <Trash className="h-4 w-4" />

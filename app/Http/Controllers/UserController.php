@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\User\DeleteUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -20,10 +21,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function show(User $user)
+    public function destroy(User $user, DeleteUser $deleteUser)
     {
-        return Inertia::render(component: 'users/show', props: [
-            'user' => $user
-        ]);
+        Gate::authorize('delete', $user);
+
+        $deleteUser->handle($user);
+
+        return redirect()->route('users.index');
     }
 }

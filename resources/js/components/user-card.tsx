@@ -6,18 +6,25 @@ import { User } from '@/types';
 import { Link } from '@inertiajs/react';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
 import { format, formatDistanceToNow } from 'date-fns';
-import { Edit, EllipsisVertical, Mail, Trash, User as UserIcon } from 'lucide-react';
+import { Edit, EllipsisVertical, Mail, Shield, Trash, User as UserIcon } from 'lucide-react';
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
 interface UserCardProps {
   user: User;
   onDelete?: (user: User) => void;
+  onRoleChange?: (user: User) => void;
 }
 
-export function UserCard({ user, onDelete }: UserCardProps) {
+export function UserCard({ user, onDelete, onRoleChange }: UserCardProps) {
   const handleDelete = () => {
     if (onDelete) {
       onDelete(user);
+    }
+  };
+
+  const handleRoleChange = () => {
+    if (onRoleChange) {
+      onRoleChange(user);
     }
   };
 
@@ -37,9 +44,7 @@ export function UserCard({ user, onDelete }: UserCardProps) {
           <div className="flex items-center space-x-3">
             <Avatar className="h-10 w-10">
               <AvatarImage src={user.avatar} alt={user.name} />
-              <AvatarFallback className="bg-primary/10 text-primary">
-                {getInitials(user.name)}
-              </AvatarFallback>
+              <AvatarFallback className="bg-primary/10 text-primary">{getInitials(user.name)}</AvatarFallback>
             </Avatar>
             <div>
               <h3 className="text-lg font-semibold">{user.name}</h3>
@@ -91,11 +96,9 @@ export function UserCard({ user, onDelete }: UserCardProps) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem asChild>
-                <Link href={`/users/${user.id}/edit`} className="flex items-center gap-2">
-                  <Edit className="h-4 w-4" />
-                  Edit
-                </Link>
+              <DropdownMenuItem onClick={handleRoleChange} className="flex items-center gap-2">
+                <Shield className="h-4 w-4" />
+                Change Role
               </DropdownMenuItem>
               <DropdownMenuItem onClick={handleDelete} className="text-red-600">
                 <Trash className="h-4 w-4" />
@@ -107,4 +110,4 @@ export function UserCard({ user, onDelete }: UserCardProps) {
       </CardFooter>
     </Card>
   );
-} 
+}

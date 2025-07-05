@@ -184,6 +184,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         [UserController::class, 'show']
     )->name('users.show');
 
+    Route::delete(
+        '/users/{user}', 
+        [UserController::class, 'destroy']
+    )->name('users.destroy');
+
     Route::post(
         '/invitations',
         [InvitationController::class, 'store']

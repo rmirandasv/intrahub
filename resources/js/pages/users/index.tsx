@@ -1,19 +1,21 @@
+import ChangeUserRoleModal from '@/components/change-user-role-modal';
+import Heading from '@/components/heading';
+import SendInvitationModal from '@/components/send-invitation-modal';
+import Container from '@/components/ui/container';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { UserCard } from '@/components/user-card';
 import { UserDeleteModal } from '@/components/user-delete-modal';
 import { UserTable } from '@/components/user-table';
-import Heading from '@/components/heading';
-import SendInvitationModal from "@/components/send-invitation-modal";
-import { Button } from '@/components/ui/button';
-import Container from '@/components/ui/container';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import AppLayout from '@/layouts/app-layout';
 import { Paginated, User } from '@/types';
-import { Users, Grid3X3, List } from 'lucide-react';
+import { Grid3X3, List, Users } from 'lucide-react';
 import { useState } from 'react';
 
 export default function UsersIndex({ users }: { users: Paginated<User> }) {
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [userToChangeRole, setUserToChangeRole] = useState<User | null>(null);
+  const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
 
   const handleDeleteClick = (user: User) => {
@@ -21,9 +23,19 @@ export default function UsersIndex({ users }: { users: Paginated<User> }) {
     setIsDeleteModalOpen(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseDeleteModal = () => {
     setIsDeleteModalOpen(false);
     setUserToDelete(null);
+  };
+
+  const handleRoleChangeClick = (user: User) => {
+    setUserToChangeRole(user);
+    setIsRoleModalOpen(true);
+  };
+
+  const handleCloseRoleModal = () => {
+    setIsRoleModalOpen(false);
+    setUserToChangeRole(null);
   };
 
   return (
@@ -61,17 +73,19 @@ export default function UsersIndex({ users }: { users: Paginated<User> }) {
             {viewMode === 'cards' ? (
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {users.data.map((user) => (
-                  <UserCard key={user.id} user={user} onDelete={handleDeleteClick} />
+                  <UserCard key={user.id} user={user} onDelete={handleDeleteClick} onRoleChange={handleRoleChangeClick} />
                 ))}
               </div>
             ) : (
-              <UserTable users={users.data} onDelete={handleDeleteClick} />
+              <UserTable users={users.data} onDelete={handleDeleteClick} onRoleChange={handleRoleChangeClick} />
             )}
           </div>
         )}
       </Container>
 
-      <UserDeleteModal user={userToDelete} isOpen={isDeleteModalOpen} onClose={handleCloseModal} />
+      <UserDeleteModal user={userToDelete} isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal} />
+
+      {userToChangeRole && <ChangeUserRoleModal user={userToChangeRole} isOpen={isRoleModalOpen} onOpenChange={handleCloseRoleModal} />}
     </AppLayout>
   );
 }
