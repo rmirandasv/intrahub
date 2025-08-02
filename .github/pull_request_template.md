@@ -2,14 +2,14 @@
 <!-- Briefly describe the changes made -->
 
 ## Type of change
-- [ ] 🐛 Bug fix
-- [ ] ✨ New feature
-- [ ] 📝 Documentation
-- [ ] 🎨 Style improvement
-- [ ] ♻️ Refactoring
-- [ ] ⚡ Performance improvement
-- [ ] ✅ Test
-- [ ] 🔧 Configuration
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Documentation
+- [ ] Style improvement
+- [ ]  Refactoring
+- [ ] Performance improvement
+- [ ] Test
+- [ ] Configuration
 
 ## Changes made
 <!-- List the main changes -->
