@@ -1,3 +1,13 @@
+# [0.7.0](https://github.com/rmirandasv/intrahub/compare/v0.6.0...v0.7.0) (2025-08-02)
+
+
+### Features
+
+* add console command to create staff users ([e7b2617](https://github.com/rmirandasv/intrahub/commit/e7b261733d9b40981735f4bd9b291a55393e4aa9))
+* enhance category form with loading state and improved layout ([a960b50](https://github.com/rmirandasv/intrahub/commit/a960b5083e0bed89b136c472057ecae432c73789))
+* implement staff role checks and enhance UI for announcements, benefits, and events ([843f38e](https://github.com/rmirandasv/intrahub/commit/843f38ea0f7ea018f2929d7f26061bc2b4837f8c))
+* implement staff role checks i ([4ef62a5](https://github.com/rmirandasv/intrahub/commit/4ef62a545e7e55ad41b759935249fcbab0696c91))
+
 # [0.6.0](https://github.com/rmirandasv/intrahub/compare/v0.5.0...v0.6.0) (2025-07-05)
 
 
