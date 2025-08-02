@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Event, SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { Calendar, Edit, EllipsisVertical, MapPin, Trash, Users } from 'lucide-react';
@@ -38,8 +38,6 @@ export function EventCard({ event, onDelete }: EventCardProps) {
   const eventDate = event.event_date ? new Date(event.event_date) : null;
   const eventDateStr = eventDate ? eventDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : '';
 
-  const shortContent = post.content.length > 80 ? post.content.slice(0, 77) + '...' : post.content;
-
   const imageUrl = post.images && post.images.length > 0 ? post.images[0] : null;
 
   return (
@@ -60,22 +58,22 @@ export function EventCard({ event, onDelete }: EventCardProps) {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm">
-                <EllipsisVertical className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem asChild>
-                <Link href={route('events.edit', event.id)} className="flex items-center gap-2">
-                  <Edit className="h-4 w-4" />
-                  Edit
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleDelete}>
-                <Trash className="h-4 w-4" />
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                  <EllipsisVertical className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem asChild>
+                  <Link href={route('events.edit', event.id)} className="flex items-center gap-2">
+                    <Edit className="h-4 w-4" />
+                    Edit
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleDelete}>
+                  <Trash className="h-4 w-4" />
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : null}
         </div>
       </CardHeader>

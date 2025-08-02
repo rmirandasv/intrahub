@@ -11,7 +11,7 @@ export default function EditCategory({ category }: { category: Category }) {
 
   const handleSubmit = (values: CategoryFormValues) => {
     setLoading(true);
-    
+
     router.put(`/categories/${category.id}`, values, {
       onFinish: () => setLoading(false),
       onError: (errors) => {

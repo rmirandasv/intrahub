@@ -64,11 +64,7 @@ export default function CategoryForm({ category, onSubmit, loading = false }: Ca
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Textarea 
-                        placeholder="Enter a description for this category (optional)" 
-                        className="min-h-[120px]"
-                        {...field} 
-                      />
+                      <Textarea placeholder="Enter a description for this category (optional)" className="min-h-[120px]" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -76,13 +72,9 @@ export default function CategoryForm({ category, onSubmit, loading = false }: Ca
               />
             </CardContent>
           </Card>
-            <Button 
-              type="submit" 
-              disabled={loading}
-              className="w-fit"
-            >
-              {loading ? 'Saving...' : 'Save'}
-            </Button>
+          <Button type="submit" disabled={loading} className="w-fit">
+            {loading ? 'Saving...' : 'Save'}
+          </Button>
         </div>
       </form>
     </Form>

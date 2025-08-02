@@ -6,7 +6,9 @@ use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
-use function Laravel\Prompts\{text, password, confirm, info, error};
+use function Laravel\Prompts\error;
+use function Laravel\Prompts\password;
+use function Laravel\Prompts\text;
 
 class CreateStaffUser extends Command
 {
@@ -55,6 +57,7 @@ class CreateStaffUser extends Command
 
         if ($password !== $confirmPassword) {
             error('Passwords do not match');
+
             return self::FAILURE;
         }
 
@@ -67,6 +70,7 @@ class CreateStaffUser extends Command
         ]);
 
         $this->info('Staff user created successfully');
+
         return self::SUCCESS;
     }
 }

@@ -6,7 +6,7 @@ import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
 import { Benefit, Paginated, SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { Gift } from "lucide-react";
+import { Gift } from 'lucide-react';
 import { useState } from 'react';
 
 export default function BenefitIndex({ benefits }: { benefits: Paginated<Benefit> }) {
@@ -50,9 +50,9 @@ export default function BenefitIndex({ benefits }: { benefits: Paginated<Benefit
             ) : null}
           </div>
         ) : (
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {benefits.data.map((benefit) => (
-            <BenefitCard key={benefit.id} benefit={benefit} onDelete={handleDelete} />
+          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {benefits.data.map((benefit) => (
+              <BenefitCard key={benefit.id} benefit={benefit} onDelete={handleDelete} />
             ))}
           </div>
         )}

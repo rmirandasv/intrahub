@@ -4,7 +4,7 @@ import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
 import { Paginated, Post, SharedData, type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
-import { LayoutGrid } from "lucide-react";
+import { LayoutGrid } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {

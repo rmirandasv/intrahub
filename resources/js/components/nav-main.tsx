@@ -3,7 +3,10 @@ import { SharedData, type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 
 export function NavMain({ items = [] }: { items: NavItem[] }) {
-  const { props: { auth }, url } = usePage<SharedData>();
+  const {
+    props: { auth },
+    url,
+  } = usePage<SharedData>();
   return (
     <SidebarGroup className="px-2 py-0">
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -14,15 +17,15 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
           }
 
           return (
-          <SidebarMenuItem key={item.title}>
-            <SidebarMenuButton asChild isActive={url.startsWith(item.href)} tooltip={{ children: item.title }}>
-              <Link href={item.href} prefetch>
-                {item.icon && <item.icon />}
-                <span>{item.title}</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        );
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton asChild isActive={url.startsWith(item.href)} tooltip={{ children: item.title }}>
+                <Link href={item.href} prefetch>
+                  {item.icon && <item.icon />}
+                  <span>{item.title}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          );
         })}
       </SidebarMenu>
     </SidebarGroup>

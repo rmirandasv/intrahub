@@ -29,7 +29,7 @@ export default function AnnouncementIndex({ announcements }: { announcements: Pa
       <Container>
         <Heading title="Company Announcements" description="Stay informed with the latest company news and updates">
           {auth.user.is_staff ? (
-          <Button asChild>
+            <Button asChild>
               <Link href="/announcements/create">Create Announcement</Link>
             </Button>
           ) : null}
@@ -42,11 +42,11 @@ export default function AnnouncementIndex({ announcements }: { announcements: Pa
             <h3 className="font-semibol mt-2 text-sm">No announcements</h3>
             <p className="mt-1 text-sm text-foreground">Get started by creating a new announcement.</p>
             {auth.user.is_staff ? (
-            <div className="mt-6">
-              <Button asChild>
-                <Link href="/announcements/create">Create Announcement</Link>
-              </Button>
-            </div>
+              <div className="mt-6">
+                <Button asChild>
+                  <Link href="/announcements/create">Create Announcement</Link>
+                </Button>
+              </div>
             ) : null}
           </div>
         ) : (

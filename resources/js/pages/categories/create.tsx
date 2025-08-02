@@ -10,7 +10,7 @@ export default function CreateCategory() {
 
   const handleSubmit = (values: CategoryFormValues) => {
     setLoading(true);
-    
+
     router.post('/categories', values, {
       onFinish: () => setLoading(false),
       onError: (errors) => {
