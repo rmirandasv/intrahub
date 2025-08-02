@@ -268,6 +268,7 @@ export default function BenefitForm({ initialData, onSubmit, loading = false, ca
                     <FormControl>
                       <Switch checked={field.value} onCheckedChange={field.onChange} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />

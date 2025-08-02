@@ -40,9 +40,9 @@ class EventController extends Controller
     {
         Gate::authorize('create', Event::class);
 
-        $event = $createEvent->handle($request->user(), $request->validated());
+        $createEvent->handle($request->user(), $request->validated());
 
-        return redirect()->route('events.show', $event);
+        return redirect()->route('events.index');
     }
 
     public function show(Event $event)
