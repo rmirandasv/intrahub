@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('accepted_at')->nullable();
             $table->timestamps();
 
-            $table->foreign('invited_by')->references('id')->on('users')->nullOnDelete();
+            $table->foreign('invited_by')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
