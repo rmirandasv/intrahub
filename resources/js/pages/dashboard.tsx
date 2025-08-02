@@ -2,8 +2,9 @@ import Heading from '@/components/heading';
 import { PostCard } from '@/components/post-card';
 import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
-import { Paginated, Post, type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Paginated, Post, SharedData, type BreadcrumbItem } from '@/types';
+import { Head, usePage } from '@inertiajs/react';
+import { LayoutGrid } from "lucide-react";
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -13,7 +14,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Dashboard({ posts }: { posts: Paginated<Post> }) {
-  // Group posts by type for better organization
+  const { auth } = usePage<SharedData>().props;
   const announcements = posts.data.filter((post) => post.post_type === 'announcement');
   const benefits = posts.data.filter((post) => post.post_type === 'benefit');
   const events = posts.data.filter((post) => post.post_type === 'event');
@@ -65,8 +66,13 @@ export default function Dashboard({ posts }: { posts: Paginated<Post> }) {
           {/* Empty State */}
           {posts.data.length === 0 && (
             <div className="py-12 text-center">
+              <div className="mx-auto h-12 w-12 text-muted-foreground/50">
+                <LayoutGrid className="h-12 w-12" />
+              </div>
               <h3 className="mb-2 text-lg font-medium text-muted-foreground">No posts yet</h3>
-              <p className="text-sm text-muted-foreground">Create your first announcement, event, or benefit to get started.</p>
+              {auth.user.is_staff ? (
+                <p className="text-sm text-muted-foreground">Create your first announcement, event, or benefit to get started.</p>
+              ) : null}
             </div>
           )}
         </div>

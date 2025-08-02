@@ -42,6 +42,7 @@ export type NavItem = {
   href: string;
   icon?: LucideIcon | null;
   isActive?: boolean;
+  isStaff?: boolean;
 };
 
 export type SharedData = {

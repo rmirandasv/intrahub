@@ -12,46 +12,41 @@ const mainNavItems: NavItem[] = [
     title: 'Dashboard',
     href: '/dashboard',
     icon: LayoutGrid,
+    isStaff: false,
   },
   {
     title: 'Announcements',
     href: '/announcements',
     icon: Megaphone,
+    isStaff: false,
   },
   {
     title: 'Categories',
     href: '/categories',
     icon: Folder,
+    isStaff: true,
   },
   {
     title: 'Benefits',
     href: '/benefits',
     icon: Gift,
+    isStaff: false,
   },
   {
     title: 'Events',
     href: '/events',
     icon: Calendar,
+    isStaff: false,
   },
   {
     title: 'Users',
     href: '/users',
     icon: Users,
+    isStaff: true,
   },
 ];
 
-const footerNavItems: NavItem[] = [
-  {
-    title: 'Repository',
-    href: 'https://github.com/laravel/react-starter-kit',
-    icon: Folder,
-  },
-  {
-    title: 'Documentation',
-    href: 'https://laravel.com/docs/starter-kits#react',
-    icon: BookOpen,
-  },
-];
+const footerNavItems: NavItem[] = [];
 
 export function AppSidebar() {
   return (
