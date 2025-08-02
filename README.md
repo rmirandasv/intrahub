@@ -10,6 +10,9 @@
 
 A modern internal communication platform for companies that enables staff to share announcements, benefits, and events with employees. Built with Laravel, Inertia.js, React, and TypeScript.
 
+<img width="1872" height="799" alt="image" src="https://github.com/user-attachments/assets/91b5218b-8fe7-4a56-b594-30bf389b3ab9" />
+
+
 ## ✨ Features
 
 ### 📢 **Announcements**
