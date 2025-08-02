@@ -1,10 +1,11 @@
 import { AnnouncementDetail } from '@/components/announcement-detail';
 import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
-import { Announcement, PostComment } from '@/types';
-import { router } from '@inertiajs/react';
+import { Announcement, PostComment, SharedData } from '@/types';
+import { router, usePage } from '@inertiajs/react';
 
 export default function AnnouncementShow({ announcement }: { announcement: Announcement }) {
+  const { auth } = usePage<SharedData>().props;
   const handleAddComment = (content: string) => {
     router.post(`/announcements/${announcement.id}/comments`, {
       content: content,
@@ -43,10 +44,10 @@ export default function AnnouncementShow({ announcement }: { announcement: Annou
           onAddComment={handleAddComment}
           onEditComment={handleEditComment}
           onDeleteComment={handleDeleteComment}
-          canEdit={true} // TODO: Add proper authorization
-          canDelete={true} // TODO: Add proper authorization
-          canEditComments={true} // TODO: Add proper authorization
-          canDeleteComments={true} // TODO: Add proper authorization
+          canEdit={auth.user.is_staff} // TODO: Add proper authorization
+          canDelete={auth.user.is_staff} // TODO: Add proper authorization
+          canEditComments={auth.user.is_staff} // TODO: Add proper authorization
+          canDeleteComments={auth.user.is_staff} // TODO: Add proper authorization
         />
       </Container>
     </AppLayout>

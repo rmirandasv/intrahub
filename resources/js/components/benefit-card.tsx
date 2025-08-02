@@ -1,8 +1,8 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Benefit } from '@/types';
-import { Link } from '@inertiajs/react';
+import { Benefit, SharedData } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
 import { Calendar, Edit, EllipsisVertical, Globe, MapPin, Trash } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 
@@ -12,6 +12,7 @@ interface BenefitCardProps {
 }
 
 export function BenefitCard({ benefit, onDelete }: BenefitCardProps) {
+  const { auth } = usePage<SharedData>().props;
   const handleDelete = () => {
     if (onDelete) {
       onDelete(benefit);
@@ -20,6 +21,11 @@ export function BenefitCard({ benefit, onDelete }: BenefitCardProps) {
 
   return (
     <Card className="w-full">
+      {benefit.post.images && benefit.post.images.length > 0 && (
+        <div className="aspect-video w-full overflow-hidden rounded-t-lg">
+          <img src={benefit.post.images[0]} alt={benefit.post.title} className="h-full w-full object-cover" />
+        </div>
+      )}
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex flex-col gap-1">
@@ -34,25 +40,27 @@ export function BenefitCard({ benefit, onDelete }: BenefitCardProps) {
             <CardTitle className="mt-1 text-lg font-semibold">{benefit.post.title}</CardTitle>
             <CardDescription className="text-sm">{benefit.partner_name}</CardDescription>
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm">
-                <EllipsisVertical className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem asChild>
-                <Link href={route('benefits.edit', benefit.id)} className="flex items-center gap-2">
-                  <Edit className="h-4 w-4" />
-                  Edit
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleDelete}>
-                <Trash className="h-4 w-4" />
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {auth.user.is_staff ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm">
+                  <EllipsisVertical className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem asChild>
+                  <Link href={route('benefits.edit', benefit.id)} className="flex items-center gap-2">
+                    <Edit className="h-4 w-4" />
+                    Edit
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleDelete}>
+                  <Trash className="h-4 w-4" />
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : null}
         </div>
       </CardHeader>
       <CardContent className="pb-3">

@@ -6,11 +6,11 @@ import { ImageGallery } from '@/components/ui/image-gallery';
 import { LikeButton } from '@/components/ui/like-button';
 import { useAppearance } from '@/hooks/use-appearance';
 import { useInitials } from '@/hooks/use-initials';
-import { Announcement } from '@/types';
+import { Announcement, SharedData } from '@/types';
 import { BlockNoteView } from '@blocknote/mantine';
 import '@blocknote/mantine/style.css';
 import { useCreateBlockNote } from '@blocknote/react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
 import { format, formatDistanceToNow } from 'date-fns';
 import { Clock, Edit, EllipsisVertical, MessageCircle, Share2, Trash } from 'lucide-react';
@@ -22,6 +22,7 @@ interface AnnouncementCardProps {
 }
 
 export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardProps) {
+  const { auth } = usePage<SharedData>().props;
   const initials = useInitials();
   const { appearance } = useAppearance();
   const editor = useCreateBlockNote({
@@ -85,25 +86,27 @@ export function AnnouncementCard({ announcement, onDelete }: AnnouncementCardPro
               Share
             </Button>
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm">
-                <EllipsisVertical className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem asChild>
-                <Link href={route('announcements.edit', announcement.id)} className="flex items-center gap-2">
-                  <Edit className="h-4 w-4" />
-                  Edit
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleDelete}>
-                <Trash className="h-4 w-4" />
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {auth.user.is_staff ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm">
+                  <EllipsisVertical className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem asChild>
+                  <Link href={route('announcements.edit', announcement.id)} className="flex items-center gap-2">
+                    <Edit className="h-4 w-4" />
+                    Edit
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleDelete}>
+                  <Trash className="h-4 w-4" />
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : null}
         </div>
       </CardFooter>
     </Card>

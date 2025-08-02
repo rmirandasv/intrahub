@@ -4,12 +4,13 @@ import Heading from '@/components/heading';
 import { Button } from '@/components/ui/button';
 import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
-import { Announcement, Paginated } from '@/types';
-import { Link } from '@inertiajs/react';
+import { Announcement, Paginated, SharedData } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
 import { Megaphone } from 'lucide-react';
 import { useState } from 'react';
 
 export default function AnnouncementIndex({ announcements }: { announcements: Paginated<Announcement> }) {
+  const { auth } = usePage<SharedData>().props;
   const [announcementToDelete, setAnnouncementToDelete] = useState<Announcement | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -27,9 +28,11 @@ export default function AnnouncementIndex({ announcements }: { announcements: Pa
     <AppLayout breadcrumbs={[{ title: 'Announcements', href: '/announcements' }]}>
       <Container>
         <Heading title="Company Announcements" description="Stay informed with the latest company news and updates">
-          <Button asChild>
-            <Link href="/announcements/create">Create Announcement</Link>
-          </Button>
+          {auth.user.is_staff ? (
+            <Button asChild>
+              <Link href="/announcements/create">Create Announcement</Link>
+            </Button>
+          ) : null}
         </Heading>
         {announcements.data.length === 0 ? (
           <div className="mt-8 text-center">
@@ -38,11 +41,13 @@ export default function AnnouncementIndex({ announcements }: { announcements: Pa
             </div>
             <h3 className="font-semibol mt-2 text-sm">No announcements</h3>
             <p className="mt-1 text-sm text-foreground">Get started by creating a new announcement.</p>
-            <div className="mt-6">
-              <Button asChild>
-                <Link href="/announcements/create">Create Announcement</Link>
-              </Button>
-            </div>
+            {auth.user.is_staff ? (
+              <div className="mt-6">
+                <Button asChild>
+                  <Link href="/announcements/create">Create Announcement</Link>
+                </Button>
+              </div>
+            ) : null}
           </div>
         ) : (
           <div className="mt-6 space-y-6">

@@ -1,10 +1,11 @@
 import { BenefitDetail } from '@/components/benefit-detail';
 import Container from '@/components/ui/container';
 import AppLayout from '@/layouts/app-layout';
-import { Benefit, PostComment } from '@/types';
-import { router } from '@inertiajs/react';
+import { Benefit, PostComment, SharedData } from '@/types';
+import { router, usePage } from '@inertiajs/react';
 
 export default function BenefitShow({ benefit }: { benefit: Benefit }) {
+  const { auth } = usePage<SharedData>().props;
   const handleAddComment = (content: string) => {
     router.post(`/benefits/${benefit.id}/comments`, {
       content: content,
@@ -43,10 +44,10 @@ export default function BenefitShow({ benefit }: { benefit: Benefit }) {
           onAddComment={handleAddComment}
           onEditComment={handleEditComment}
           onDeleteComment={handleDeleteComment}
-          canEdit={true} // TODO: Add proper authorization
-          canDelete={true} // TODO: Add proper authorization
-          canEditComments={true} // TODO: Add proper authorization
-          canDeleteComments={true} // TODO: Add proper authorization
+          canEdit={auth.user.is_staff}
+          canDelete={auth.user.is_staff}
+          canEditComments={auth.user.is_staff}
+          canDeleteComments={auth.user.is_staff}
         />
       </Container>
     </AppLayout>
