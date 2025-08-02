@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/rmirandasv/intrahub/compare/v0.7.0...v0.7.1) (2025-08-02)
+
+
+### Bug Fixes
+
+* update foreign key constraint on invitations table to cascade on delete ([eed2ddb](https://github.com/rmirandasv/intrahub/commit/eed2ddb11686b945d783bdac3e45cbbca9f64964))
+
 # [0.7.0](https://github.com/rmirandasv/intrahub/compare/v0.6.0...v0.7.0) (2025-08-02)
 
 
