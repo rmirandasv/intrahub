@@ -1,3 +1,10 @@
+# [0.8.0](https://github.com/rmirandasv/intrahub/compare/v0.7.1...v0.8.0) (2025-09-16)
+
+
+### Features
+
+* add trust proxies middleware to app configuration ([8044264](https://github.com/rmirandasv/intrahub/commit/804426468210f78409ec9c8ac57f4694fc4a6bf0))
+
 ## [0.7.1](https://github.com/rmirandasv/intrahub/compare/v0.7.0...v0.7.1) (2025-08-02)
 
 
